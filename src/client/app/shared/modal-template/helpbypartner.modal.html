@@ -1,0 +1,31 @@
+<div bsModal #helpByPartnerModal="bs-modal" class="modal fade container-fluid no-gutters" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg container row">
+    <div class="col-md-1"></div>
+    <div class=" col-md-10 modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+            <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                <img src="./assets/images/closebtn.gif"/>
+            </button>
+        </div>
+        <div class="modal-body mb-2 mt-2 ml-4 mr-4 help-content">
+            <div class="row">
+                <div class="col-md-12 bypartnerhelp">
+                    <ul>
+                        <li><span><img src="./assets/images/circle-document.png"/></span> The total number of applications that are in progress.</li>
+                        <li><span><img src="./assets/images/circle-check.png"/></span> The total number of applications that are in submitted, pending or active status.</li>
+                        <li><span><img src="./assets/images/circle-suitcase.png"/></span> The total number of applications that were approved by CMS.</li>
+                        <li><span><img src="./assets/images/circle-close.png"/></span> The total number of applications that were expired in status, denied by CMS, or cancelled.</li>
+                        <li><span><img src="./assets/images/circle-plus.png"/></span> Aggregate total for a given application type.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="modal-footer">
+        </div> -->
+    </div>
+</div>
+<div class="col-md-1"></div>
+</div>

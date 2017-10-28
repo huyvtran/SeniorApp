@@ -1,0 +1,133 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showForm = !showForm">
+            Converted
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+                </a>
+        </h2>
+        <div class="convertedpopover"><i class="fa fa-info-circle" [popover]="popTemplate" tabindex="1" placement="bottom" triggers="focus"></i>
+            <ng-template #popTemplate>
+                <div class="bypopover">This report provides a summary of quotes converted for each day.</div>
+            </ng-template>
+        </div>
+        <div class="block-group-invert" [hidden]='showForm'>
+            <div class="content no-gutters mx-auto formHolder">
+                <form [formGroup]="convertedForm" name="convertedForm" novalidate class="form-inline" (submit)="searchReport()">
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="fromDate" class="calendarFieldLabel"><h3 class="pass-icon">FROM</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="fromDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="convertedForm.controls.fromDate" [htmlElem]="fromDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="toDate" class="calendarFieldLabel"><h3 class="pass-icon">TO</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="convertedForm.controls.toDate" [htmlElem]="toDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="brand"><h3>BRAND</h3></label>
+                            <p-multiSelect [options]="brandList" formControlName="brands" [(ngModel)]="selectedBrand" [style]="{'width':'100%'}" styleClass="width100"
+                                defaultLabel="Multi Select Brand"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="state"><h3>STATE</h3></label>
+                            <p-multiSelect [options]="stateList" formControlName="states" [(ngModel)]="selectedState" [style]="{'width':'100%'}" styleClass="width100"
+                                defaultLabel="Multi Select State"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="product"><h3>PRODUCT TYPES</h3></label>
+                            <p-multiSelect [options]="productList" formControlName="products" [(ngModel)]="selectedProduct" [style]="{'width':'100%'}"
+                                styleClass="width100" defaultLabel="Multi Select Product"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="app"><h3>APP SOURCE</h3></label>
+                            <p-dropdown [options]="appList" formControlName="apps" [(ngModel)]="selectedApp" placeholder="Select App Source"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row no-gutters actionControlsContainer">
+                        <div class="form-group text-center mx-auto">
+                            <button class="search-button" type="submit"></button>
+                            <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetConvertedForm();"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportConvertedSearchList }">
+        <h2 (click)="showForm = !showForm">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list" [hidden]='!showForm' *ngIf=" reportConvertedSearchList && reportConvertedSearchList.length > 0">
+                <div class="col-12">
+                    <div class="result-set-info-top"></div>
+                    <span class="help-popup">
+                        <a (click)="helpConvertedModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                            <sd-converted-help #helpConvertedModal [title]="'Help'"></sd-converted-help> 
+                        <a><img src="./assets/images/download-icon_27.png" (click)="saveDownloadData()" alt="download" title="Download" /></a> 
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top advanced-result noresultfnd1">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>DATE</th>
+                                    <th>BRAND</th>
+                                    <th>STATE</th>
+                                    <th>PRODUCT TYPE</th>
+                                    <th>CAMPAIGN ID</th>
+                                    <th class="txtAlignC">CONVERTED</th>
+                                    <th class="txtAlignC">DENIALS</th>
+                                    <th class="txtAlignC">ABANDONED</th>
+                                    <th class="txtAlignC">APP ABANDONED</th>
+                                    <th class="txtAlignC">TOTAL</th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let convertedRow of reportConvertedSearchList">
+                                    <td>{{ convertedRow.quoteDate }}</td>
+                                    <td>{{ convertedRow.brand }}</td>
+                                    <td>{{ convertedRow.state }}</td>
+                                    <td>{{ convertedRow.productType }}</td>
+                                    <td>{{ convertedRow.campaignId }}</td>
+                                    <td class="txtAlignC">{{ convertedRow.convertedCount }}</td>
+                                    <td class="txtAlignC">{{ convertedRow.cmsDenialCount }}</td>
+                                    <td class="txtAlignC">{{ convertedRow.abandonedCount }}</td>
+                                    <td class="txtAlignC">{{ convertedRow.appAbandonedCount }}</td>
+                                    <td class="txtAlignC">{{ convertedRow.totalQuoteCount }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div class="result-set-info">1-10 of 85 Results.</div> -->
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showResult'>
+                <div class="col-12 error-input"><span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }} </span></div>
+            </div>
+        </div>
+    </div>
+</div>

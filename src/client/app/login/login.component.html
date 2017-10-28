@@ -1,0 +1,47 @@
+<nav class="navbar fixed-top sos-ui-header" >
+   <div class="container-fluid">
+        
+   </div>
+</nav>
+
+
+<div class="container-fluid h-100 sos-ui-site-content-wrapper">
+    <div class="container-fluid no-gutters sos-ui-site-content"> 
+        <!-- Login Page Content starts here -->
+        <div class="row mx-auto my-auto login-ui-content-layout d-table">
+          <div class=" login-ui-content d-table-cell align-middle"> 
+            <div class="row mx-auto login-ui-content-logo" > 
+              <img src="./assets/images/Login-Logo-web.png" class="img-fluid mx-auto"  
+                    alt="OLS CONSOLE">
+            </div>
+            <div class="mx-auto login-ui-content-logo-label"> 
+              <div class="fontFamily login-label mx-auto"> 
+                <span class="mx-auto">LOGIN</span>
+              </div>
+            </div>
+            <!--action='/siteminderagent/forms/login.fcc' method='post'-->
+            <form  [formGroup]="loginForm" (submit)="authenticate()">
+              <div id="error" class="form-group mx-auto">{{ invalidCredentials }}</div> 
+              <div class="form-group mx-auto login user">
+                  <i class="fa fa-user"></i>
+                  <input type="text" class="form-control" id="username" name="USER" formControlName="username" placeholder="Enter User Name" #usernameInput >
+                  <span class="floating-label-placeholder user"><span class="enter-text" >Enter</span><span class="enter-text-span"> User Name</span></span>
+                  <control-messages [control]="loginForm.controls.username" [htmlElem] = "usernameInput"></control-messages>
+              </div>
+              <div class="form-group top-pad mx-auto login pass" >
+                  <i class="fa fa-key"></i>
+                  <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter Password" #passwordInput >
+                  <span class="floating-label-placeholder pass"><span class="enter-text">Enter</span><span class="enter-text-span"> Password</span></span>
+                  <control-messages [control]="loginForm.controls.password" [htmlElem] = "passwordInput"></control-messages>
+              </div>
+              <div class="form-group top-pad mx-auto">                        
+                <button type="submit" [disabled]="!loginForm.valid" 
+                        class="form-control btn btn-primary">LOGIN</button>    
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- Login Page Content ends here -->
+
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4">
+    <h2 (click)="toggleResult()">
+        Result {{ countMessage }}
+        <a class="accordion-icon">
+        <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+    </a>
+    </h2>
+    <div style="width:100%;height:auto;" class="admin-tab">
+        <div class="row user-result-list" *ngIf="enrollSearchList && enrollSearchList.length > 0" [hidden]='!showForm'>
+            <p class="col-12 resend-message" *ngIf="resendMessage">
+                <span *ngIf="failure" class="failure">
+                    <i class="fa fa-exclamation-triangle"></i> {{ resendMessage }}
+                </span>
+                <span *ngIf="success" class="success">
+                    <i class="fa fa-check"></i> {{ resendMessage }}
+                </span>
+            </p>
+            <div class="col-12 result-container">
+                <div class="result-set-info-top">{{ paginateMessage }}</div>
+                <span class="help-popup">
+                    <a (click)="helpAdminModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                    <sd-admin-help #helpAdminModal [title]="'Help'"></sd-admin-help> 
+                    <span class="seperation"></span>
+                <a href="javascript:void(0)" (click)="downloadPage()">
+                        <img src="./assets/images/download-icon_27.png" alt="download" title="Download" />
+                    </a>
+                <span class="seperation"></span>
+                <a href="javascript:void(0)" (click)="saveAllDownloadData()">
+                        <img src="./assets/images/downloadall_25.png" alt="download" title="Download All" />
+                    </a>
+                <span class="seperation"></span>
+                <span title="Resend Application">
+                        <a href="javascript:void(0)" [class.disabled]="!resendApp" title="Resend Application" (click)="resendApplication()">
+                            <i class="fa fa-reply icon-flipped" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                <span class="seperation"></span>
+                <span title="Resend Applications to Imaging systems">
+                        <a href="javascript:void(0)" [class.disabled]="!resendApp" title="Resend Applications to Imaging systems" (click)="resendApplicationImaging()">
+                            <i class="fa fa-reply-all icon-flipped" aria-hidden="true"></i>
+                        </a>
+                    </span>
+                </span>
+            </div>
+            <div class="col-12 user-result-list-inner ui-paginator-list-top search-result noresultfnd4 enroll-search-result-tap">
+                <p-dataTable #dt [value]="enrollSearchList" [rows]="10" [paginator]="true" [(first)]="pageNumber" [pageLinks]="3" (onPage)="paginationInfo($event)"
+                    (onFilter)="filterResult($event)" scrollable="true" scrollWidth="auto" [headerCheckboxToggleAllPages]="true"
+                    exportFilename="Enrollments" class="tablebrd" [alwaysShowPaginator]="false" [filters]="filters" styleClass="ui-column-filter">
+                    <p-column field="applicationStatus" [style]="{'min-width':'50px','max-width':'50px','text-align':'center'}">
+                        <ng-template pTemplate="header">
+                            <input type="checkbox" name="selection" [(ngModel)]="selectCheckBox" [checked]="selectCheckBox" (change)="selectAllSubmitted($event)"
+                            />
+                        </ng-template>
+                        <ng-template let-col let-appnStatus="rowData" pTemplate="body">
+                            <input type="checkbox" *ngIf="appnStatus[col.field] === 'SUBMITTED'" [(ngModel)]="appnStatus.status" [checked]="appnStatus.status"
+                                (change)="singleItemClick(appnStatus)" />
+                        </ng-template>
+                    </p-column>
+                    <p-column field="acn" header="ACN" [sortable]="true" [filter]="true" styleClass="font-weight-bold" [style]="{'min-width':'130px','max-width':'130px','text-align': 'center'}">
+                        <ng-template let-col let-acnLink="rowData" pTemplate="body">
+                            <a [routerLink]="['/home/administration/enrolldetails', acnLink[col.field] ]">{{ acnLink[col.field] }}</a>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="confirmationNo" header="CONFIRMATION NO" [sortable]="true" [filter]="true" [style]="{'min-width':'178px', 'max-width':'178px','text-align': 'center'}"></p-column>
+                    <p-column field="applicationStatus" header="APP STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'128px', 'max-width':'128px','text-align': 'center'}">
+                        <ng-template let-col let-applicationStatus="rowData" pTemplate="body">
+                            <span [ngClass]="{'is-submitted':applicationStatus[col.field] === 'SUBMITTED', 'is-inprogress': applicationStatus[col.field] === 'INPROGRESS' }">{{ applicationStatus[col.field] }}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="appSubStatus" header="APP SUB STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'199px','max-width':'199px', 'text-align': 'center'}"></p-column>
+                    <p-column field="applicationVersion" header="VERSION" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px','text-align': 'center'}"></p-column>
+                    <p-column field="state" header="ST" [sortable]="true" [filter]="true" [style]="{'min-width':'70px', 'max-width':'70px','text-align': 'center'}"></p-column>
+                    <p-column field="firstName" header="FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                    <p-column field="lastName" header="LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}"></p-column>
+                    <p-column field="requestEffectiveDate" header="REQ EFF" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}">
+                        <ng-template let-col let-reffDate="rowData" pTemplate="body">
+                            {{ reffDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="searchCriteria.appSearchCriteriaBean.searchBy ==='ADVANCED'" field="dob" header="DOB" [sortable]="true" [filter]="true" [style]="{'min-width':'110px', 'max-width':'110px','text-align': 'center'}">
+                        <ng-template let-col let-dobField="rowData" pTemplate="body">
+                            {{ dobField[col.field] | date: 'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="searchCriteria.appSearchCriteriaBean.searchBy ==='ADVANCED'" field="sex" header="GENDER" [sortable]="true" [filter]="true" [style]="{'min-width':'100px','max-width':'100px', 'text-align': 'center'}"></p-column>
+                    <p-column field="ebReply" header="EB" [sortable]="true" [filter]="true" [style]="{'min-width':'100px','max-width':'100px', 'text-align': 'center'}"></p-column>
+                    <p-column field="acsSentTimeStamp" header="ACS" [sortable]="true" [filter]="true" [style]="{'min-width':'120px','max-width':'120px', 'text-align': 'center'}">
+                        <ng-template let-col let-ascDate="rowData" pTemplate="body">
+                            {{ ascDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="medisysSentTimeStamp" header="MEDISYS" [sortable]="true" [filter]="true" [style]="{'min-width':'144px','max-width':'144px', 'text-align': 'center'}">
+                        <ng-template let-col let-medisysDate="rowData" pTemplate="body">
+                            {{ medisysDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="imagingSentTimeStamp" header="IMAGING" [sortable]="true" [filter]="true" [style]="{'min-width':'146px','max-width':'146px', 'text-align': 'center'}">
+                        <ng-template let-col let-imagingDate="rowData" pTemplate="body">
+                            {{ imagingDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="hovSentTimeStamp" header="HOV" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}">
+                        <ng-template let-col let-hovDate="rowData" pTemplate="body">
+                            {{ hovDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="cosmoSentTimeStamp" header="COSMO" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}">
+                        <ng-template let-col let-cosmosDate="rowData" pTemplate="body">
+                            {{ cosmosDate[col.field] | date:'MM/dd/yyyy' }}
+                        </ng-template>
+                    </p-column>
+                    <p-column field="medicareClaimNo" header="HICN" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}"></p-column>
+                    <p-column field="productId" header="PRODUCT ID" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                    <p-column field="productDisplayName" header="PRODUCT NAME" [sortable]="true" [filter]="true" [style]="{'min-width':'190px','max-width':'190px', 'text-align': 'center', 'white-space':'normal'}"></p-column>
+                    <p-column field="documentType" header="DOCUMENT TYPE" [sortable]="true" [filter]="true" [style]="{'min-width':'161px','max-width':'161px', 'text-align': 'center'}"></p-column>
+                </p-dataTable>
+            </div>
+        </div>
+        <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showForm'>
+            <div class="col-12 error-input">
+                <span class="error-message">
+                    <i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

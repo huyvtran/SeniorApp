@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<title>SOLS CONSOLE</title>
+	<style type="text/css">
+		[ng\:cloak],
+		[ng-cloak],
+		[data-ng-cloak],
+		[x-ng-cloak],
+		.ng-cloak,
+		.x-ng-cloak {
+			display: none !important;
+		}
+
+		#error {
+			color: rgb(245, 59, 7);
+			font-size: 16px;
+			display: none;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		#USER.error, #PASSWORD.error {
+			border-width: thin thin thin;
+    		border-bottom: 0.097rem solid rgb(245, 59, 7) !important;
+		}
+		.footer-text-wrapper a {
+			color: #ffffff;
+			text-decoration: none;	
+		}
+		.footer-text-wrapper a:hover {
+			color: #cccccc;
+			text-decoration: underline;
+		}
+	</style>
+	<script
+		src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="./css/main.css">
+</head>
+<body class="login-page-body">
+	<nav class="navbar fixed-top sos-ui-header">
+		<div class="container-fluid">
+		</div>
+	</nav>
+
+	<div class="container-fluid h-100 sos-ui-site-content-wrapper">
+		<div class="container-fluid no-gutters sos-ui-site-content">
+			<!-- Login Page Content starts here -->
+			<div class="row mx-auto my-auto login-ui-content-layout d-table">
+				<div class=" login-ui-content d-table-cell align-middle">
+					<div class="row mx-auto login-ui-content-logo">
+						<img src="./assets/images/Login-Logo-web.png" class="img-fluid mx-auto" alt="OLS CONSOLE">
+					</div>
+					<div class="mx-auto login-ui-content-logo-label">
+						<div class="fontFamily login-label mx-auto">
+							<span class="mx-auto">LOGIN</span>
+						</div>
+					</div>
+
+					<section class='quoteScreen login-wrapper'>
+						<div id="error">
+							<i class="fa fa-exclamation-triangle"></i>
+							<span id="error_msg">Invalid User ID/Password combination. Please try again</span>
+						</div>
+						<div class='loginnew'>
+							<form action='/siteminderagent/forms/login.fcc' method='post' id='login-form'>
+								<div class="form-group mx-auto login user">
+									<i class="fa fa-user"></i>
+									<input type="text" class="form-control form-field" id="USER" name="USER" formControlName="username" placeholder="Enter User Name">
+									<span class="floating-label-placeholder user"><span class="enter-text" >Enter</span><span class="enter-text-span"> User Name</span></span>
+									<div class="fontFamily form-control-feedback user error" style="display:none">Please enter User Name </div>
+								</div>
+								<div class="form-group top-pad mx-auto login pass">
+									<i class="fa fa-key"></i>
+									<input type="password" class="form-control form-field" id="PASSWORD" name="PASSWORD" formControlName="password" placeholder="Enter Password">
+									<span class="floating-label-placeholder pass"><span class="enter-text">Enter</span><span class="enter-text-span"> Password</span></span>
+									<div class="fontFamily form-control-feedback password error" style="display:none">Please enter Password </div>
+									<input type='hidden' name='TARGET' value='/solsadmin/' />
+								</div>
+								<div class="form-group top-pad mx-auto">
+									<button type="button" onclick="smLogin()" class="form-control btn btn-primary" id="login-btn" disabled>LOGIN</button>
+								</div>
+							</form>
+						</div>
+					</section>
+				</div>
+				<!-- Login Page Content ends here -->
+
+			</div>
+			<div class="container-fluid sos-ui-footer">
+				<span class="fontFamily mx-auto my-auto footer-text-wrapper"><span>&copy; 2010-2017 Anthem, Inc. All Rights Reserved. <a rel="nofollow" href="http://www.wellpoint.com/Legal/index.htm">Legal
+Notice</a> :: <a rel="nofollow" href="http://www.wellpoint.com/Privacy/index.htm">Privacy Policy</a>
+:: <a href="http://hrsolutions.wellpoint.com">Associates</a> :: Version 4.00_07 ::</span><span id="clock">10-16-2017 18:16:55</span></span>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			document.getElementById("login-btn").disabled = true;
+			$('.form-field').change(function() {
+				if (document.getElementById('USER').value.length == 0 || document.getElementById('PASSWORD').value.length == 0) {
+					document.getElementById("login-btn").disabled = true;
+				} else {
+					document.getElementById("login-btn").disabled = false;
+					$('.user.error').hide();
+					$('#USER').removeClass('error');
+					$('.password.error').hide();
+					$('#PASSWORD').removeClass('error');
+				}
+			});
+			$('#USER').focusout(function(){
+				if (document.getElementById('USER').value.length == 0) {
+					$('.user.error').show();
+					$('#USER').addClass('error');
+				} else {
+					$('.user.error').hide();
+					$('#USER').removeClass('error');
+				}
+			});
+			$('#PASSWORD').focusout(function(){
+				if (document.getElementById('PASSWORD').value.length == 0) {
+					$('.password.error').show();
+					$('#PASSWORD').addClass('error');
+				} else {
+					$('.password.error').hide();
+					$('#PASSWORD').removeClass('error');
+				}
+			});
+			$('#PASSWORD').keydown(function(){
+				if ($('#PASSWORD').val.length == 0) {
+					$('.password.error').show();
+					$('#PASSWORD').addClass('error');
+				} else {
+					if ($('#USER').val.length != 0) {
+						document.getElementById("login-btn").disabled = false;
+					}
+					$('.password.error').hide();
+					$('#PASSWORD').removeClass('error');
+				}
+			});
+		});
+		localStorage.removeItem('selectedAssigned');
+		localStorage.removeItem('userID');
+		document.onkeydown = function (evt) {
+			var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+			if (keyCode == 13) {
+				smLogin();
+			}
+		}
+		function smLogin() {
+			localStorage.setItem('userID', document.getElementById('USER').value);
+			document.getElementById("login-form").submit();
+		}
+		var errorMsg = 'User does not have permission to access this application';
+		function parseURLParams(url) {
+			if (url.indexOf('sm_error_msg') != -1) {
+				var sm_error_msg = location.search.split('sm_error_msg=')[1];
+				if (sm_error_msg == 1) {
+					errorMsg = 'Invalid User ID/Password combination. Please try again';
+				}
+				return true;
+			} else {
+				return false;
+			}
+		}
+		var errorObj = parseURLParams(window.location.href);
+
+		if (errorObj) {
+			document.getElementById('error_msg').innerHTML = errorMsg;
+			document.getElementById('error').style.display = 'block';
+		} else {
+			document.getElementById('error').style.display = 'none';
+		}
+		startTime();
+		function startTime() {
+			var today = new Date();
+			var d = today.getDate();
+			var mon = today.getMonth() + 1;
+			var y = today.getFullYear();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			m = checkTime(m);
+			mon = checkTime(mon);
+			s = checkTime(s);
+			document.getElementById('clock').innerHTML =
+			mon + "-" + d + "-" + y + " " + h + ":" + m + ":" + s;
+			var t = setTimeout(startTime, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+	</script>
+
+
+</body>
+
+</html>

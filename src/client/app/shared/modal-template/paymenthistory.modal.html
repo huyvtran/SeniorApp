@@ -1,0 +1,57 @@
+<div bsModal #paymentHistoryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-12 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                    <img src="./assets/images/closebtn.gif"/>
+                </button>
+            </div>
+
+            <div class="modal-body mb-2 ml-2 payment-content">
+                <div class="row col-12">
+                    <div class="col-4">
+                        <span class="popup-label">Name:</span>
+                        <span class="popup-label-value" *ngIf="reportType === 'reportSearch'">{{ appRecordObj.firstName }} {{ appRecordObj.middleInitial }} {{ appRecordObj.lastName }}</span>
+                        <span class="popup-label-value" *ngIf="reportType === 'reportPayments'">{{ appRecordObj.primaryFirst }} {{ appRecordObj.primaryLast }}</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="popup-label">ACN:</span>
+                        <span class="popup-label-value">{{ appRecordACN }}</span>
+                    </div>
+                    <div class="col-4">
+                        <span class="popup-label">Application Status:</span>
+                        <span class="popup-label-value">{{ appRecordObj.applicationStatus }}</span>
+                    </div>
+                </div>
+                <div class="row col-12 loading-container text-center my-5 error-input" *ngIf="noDataMessage.length != 0">
+                    <span class="error-message payment-history">
+                        <i class="fa fa-exclamation-triangle"></i> {{ noDataMessage }}
+                    </span>
+                </div>
+
+                <div class="row payment-result-list popupnoresultfnd" *ngIf="paymentList && ((paymentList | json) != '{}') && noDataMessage.length == 0">
+                    <p-dataTable [value]="paymentList" [paginator]="false">
+                        <p-column field="paymentTrackingDate" header="PAYMENT DATE" [sortable]="true" [style]="{'min-width':'170px','max-width':'170px','text-align':'left'}">
+                            <ng-template let-userRow="rowData" pTemplate="body">
+                                {{ userRow?.paymentTrackingDate | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="paymentTrackingID" header="PAYMENT TRACKING ID" [sortable]="true" [style]="{'min-width':'200px','max-width':'200px','text-align':'left'}"></p-column>
+                        <p-column field="paymentTrackingStatus" header="INITIAL/ ONGOING" [sortable]="true" [style]="{'min-width':'170px','max-width':'170px','text-align':'left'}"></p-column>
+                        <p-column field="paymentType" header="PAYMENT TYPE" [sortable]="true" [style]="{'min-width':'150px','max-width':'150px','text-align':'left'}"></p-column>
+                        <p-column field="paymentAmount" header="PAYMENT AMOUNT" [sortable]="true" [style]="{'min-width':'170px','max-width':'170px','text-align':'left'}">
+                            <ng-template let-userRow="rowData" pTemplate="body">
+                                $ {{ userRow?.paymentAmount }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="deletedFlag" header="STATUS" [sortable]="true" [style]="{'min-width':'110px','max-width':'110px','text-align':'left'}"></p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

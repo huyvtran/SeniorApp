@@ -1,0 +1,106 @@
+<div class="content no-gutters mx-auto formHolder">
+    <form [formGroup]="enrollAdvancedSearchForm" (submit)="searchReport()" novalidate class="form-inline">
+        <div class="content-fluid w-100" *ngIf="reportDateValidationError">
+            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ reportDateValidationError }}</span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="fromDate" class="calendarFieldLabel"><h3 >FROM</h3></label>
+                <p-calendar (onBlur)="applyMarkAsTouched()" placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                    icon="fa-calendar" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="fromDate" inputStyleClass="form-control" [inline]="false" [monthNavigator]="true"
+                    [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                    <enrollments-calendar-error-messages [control]="enrollAdvancedSearchForm.controls.fromDate" [htmlElem] = "fromDateInput">
+                    </enrollments-calendar-error-messages>                    
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="toDate" class="calendarFieldLabel"><h3 >TO</h3></label>
+                <p-calendar (onBlur)="applyMarkAsTouched()" placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                    icon="fa-calendar" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false" [monthNavigator]="true"
+                    [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                    <enrollments-calendar-error-messages [control]="enrollAdvancedSearchForm.controls.toDate" [htmlElem] = "toDateInput">
+                    </enrollments-calendar-error-messages>                    
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="appStatus"><h3>APP STATUS</h3></label>
+                <p-multiSelect [options]="appStatusList" formControlName="appStatus" [(ngModel)]="selectedAppStatus" [style]="{'width':'100%'}"
+                    styleClass="width100" defaultLabel="Multi Select App Status"></p-multiSelect>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="fromReqEffDate" class="calendarFieldLabel"><h3 >FROM REQ EFF DATE</h3></label>
+                <p-calendar (onBlur)="applyMarkAsTouched()" placeholder="mm/dd/yyyy" formControlName="fromReqEffDate" #fromReqEffDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromReqEffDate"
+                    icon="fa-calendar" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="fromReqEffDate" inputStyleClass="form-control" [inline]="false"
+                    [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                    <enrollments-calendar-error-messages [control]="enrollAdvancedSearchForm.controls.fromReqEffDate" [htmlElem] = "fromReqEffDateInput">
+                    </enrollments-calendar-error-messages>                    
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="toReqEffDate" class="calendarFieldLabel"><h3 >TO REQ EFF DATE</h3></label>
+                <p-calendar (onBlur)="applyMarkAsTouched()" placeholder="mm/dd/yyyy" formControlName="toReqEffDate" #toReqEffDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToReqEffDate"
+                    icon="fa-calendar" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="toReqEffDate" inputStyleClass="form-control" [inline]="false"
+                    [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                    <enrollments-calendar-error-messages [control]="enrollAdvancedSearchForm.controls.toReqEffDate" [htmlElem] = "toReqEffDateInput">
+                    </enrollments-calendar-error-messages>                    
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9">
+            <div class="form-group sd-padding-top">
+                <label for="backEnd"><h3 >BACK END</h3></label>
+                <p-dropdown [options]="backEndList" formControlName="backEnd" [(ngModel)]="selectedBackEnd" placeholder="Select Back End"></p-dropdown>
+            </div>
+        </div>
+        <div class="row no-gutters moreBtnContainer">
+            <div [ngStyle]="{'display': openMore}" class="moreButton" (click)="openMore='none';closeMore='block'">
+                <span class="plus">+<span class="content"> More</span></span>
+            </div>
+            <div [ngStyle]="{'display': closeMore}" class="lessButton" (click)="openMore='block';closeMore='none'">
+                <span class="less">-<span class="content"> Less</span></span>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" [ngStyle]="{'display': closeMore}">
+            <div class="form-group sd-padding-top">
+                <label for="backEndStatus"><h3>BACK END STATUS</h3></label>
+                <p-dropdown [options]="backEndStatusList" formControlName="backEndStatus" [(ngModel)]="selectedBackEndStatus" placeholder="Select Back End Status"></p-dropdown>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" [ngStyle]="{'display': closeMore}">
+            <div class="form-group sd-padding-top">
+                <label for="appSource"><h3>APP SOURCE</h3></label>
+                <p-dropdown [options]="appSourceList" formControlName="appSource" [(ngModel)]="selectedAppSource" placeholder="Select App Source"></p-dropdown>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" [ngStyle]="{'display': closeMore}">
+            <div class="form-group sd-padding-top">
+                <label for="appType"><h3>APP TYPE</h3></label>
+                <p-dropdown [options]="appTypeList" formControlName="appType" [(ngModel)]="selectedAppType" placeholder="Select App Type"></p-dropdown>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" [ngStyle]="{'display': closeMore}">
+            <div class="form-group sd-padding-top">
+                <label for="state"><h3>STATE</h3></label>
+                <p-dropdown [options]="stateList" formControlName="state" [(ngModel)]="selectedState" placeholder="Select State"></p-dropdown>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-9" [ngStyle]="{'display': closeMore}">
+            <div class="form-group sd-padding-top">
+                <label for="brand"><h3>BRAND</h3></label>
+                <p-dropdown [options]="brandList" formControlName="brand" [(ngModel)]="selectedBrand" placeholder="Select Brand"></p-dropdown>
+            </div>
+        </div>
+        <div class="row no-gutters actionControlsContainer">
+            <div class="form-group text-center mx-auto">
+                <button class="search-button" type="submit"></button>
+                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetEnrollAdvancedSearchForm();"></button>
+            </div>
+        </div>
+    </form>
+</div>

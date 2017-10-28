@@ -1,0 +1,14 @@
+<nav class="navbar fixed-top sos-ui-header" [ngClass]="{'diableDiv': logOutClick}">
+   <div class="container-fluid">
+        <sd-toolbar [idleTime]="idleTime" (modelClick) = "getLogoutClick($event)"></sd-toolbar>
+   </div>
+</nav>
+
+<sd-breadcrumb></sd-breadcrumb>
+
+<div class="container-fluid h-100 sos-ui-site-content-wrapper page-top-bottom-space">
+    <div class="container-fluid no-gutters sos-ui-site-content"> 
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<sd-timeout #timeoutModal [title]="'Session Time out'" [secondsLeft]="secondLeft"></sd-timeout>

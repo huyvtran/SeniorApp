@@ -1,0 +1,290 @@
+h1, h2, h3 {
+    font: Segoe UI;
+    color: #2f2f2f;
+}
+h1 {
+    font-weight: 400;
+    font-size: 24px;
+    padding-bottom: 30px;
+    margin-left: -15px;
+}
+h2 {
+    font-weight: 600;
+    font-size: 15px;
+}
+h3 {
+    font-weight: normal;
+    font-size: 13px;
+}
+.md-padding-top {
+    padding-top: 70px;
+}
+.sd-padding-top {
+    padding-top: 50px;
+}
+.sd-margin-top {
+    margin-top: 20px;
+}
+
+.block-group {
+    background-color: #f0f0f0;
+    border: 1px solid #d7d7d7;
+     margin-top: 10px;
+    padding: 15px 16px 2px 16px;
+}
+.formHolder{
+    width:90%;
+}
+.block-group h2 {
+    padding-bottom: 6px;
+    cursor:pointer;
+}
+.block-group-invert {
+    background-color: #FFF;
+    width:100%;
+    padding: 30px 20px 30px 20px;
+}
+.expand-icon, .collapse-icon {
+    height: 29px;
+    width:29px;
+    display:inline-block;
+}
+.expand-icon {
+    background: url(./assets/images/accordion-closed.png) no-repeat center;
+} 
+.collapse-icon {
+    background: url(./assets/images/accordion-open-new.png) no-repeat center;
+}
+.search-button {
+    background: url(./assets/images/search-icon.png) no-repeat center;
+    width: 41px;
+    height: 41px;
+    border: none;
+    margin-right:10px;
+    /*background-size: 100%;*/
+}
+.pass-icon:before {
+    content: "\f005";
+    color: #fe5e3c;
+    font-size: 9px;
+    padding-right: 3px;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 8px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+}
+.search-button:focus {
+    outline: none;
+}
+.clear-button {
+    outline: none; 
+    background: url(./assets/images/reset-icon.png) no-repeat center;
+    width: 41px;
+    height: 41px;
+    border: none;
+}
+.clear-close {
+    position: absolute;
+    right: 81px;
+    bottom: 27px;   
+    cursor: pointer;
+}
+
+.accordion-icon {
+    position: absolute;
+    right: 15px;
+    top: 7px;
+}
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}
+input.form-control {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid #959595;
+    border-radius: 0 !important;
+    /* padding: 12px 15px 8px 1px!important; */
+    font: 13px Segoe UI !important;
+    color: #777373 !important;
+    
+}
+.moreButton, .lessButton{
+   background-color:#fff;
+   /*border: 1px solid #092d4f;*/
+   border:none;
+   color:#092d4f;
+   font-size:13px;
+   width:100px;
+   padding:0px;
+   height:33px;
+   line-height:33px;
+   cursor: pointer;
+   transition: display .2s;
+  -webkit-transition: display .2s;
+  -moz-transition: display .2s;
+   
+}
+.moreBtnContainer{
+    padding-top:30px;
+    padding-bottom: 0px;
+    width:100%;
+    padding-left: 15px;
+    text-align:left;
+    
+}
+
+.moreButton  span.plus, .lessButton  span.less{
+    
+    font-size: 43px;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: middle;
+    font-weight: lighter;
+    line-height: 20px;
+}
+.moreButton span.plus span.content, .lessButton span.less span.content{
+    padding:0px;
+    margin:0px;
+    font-weight: normal;
+    font-size: 16px;
+    vertical-align: middle;
+}
+.actionControlsContainer{
+    width:100%;
+    padding-top:5px;
+    padding-bottom:25px;
+}
+.input-group-btn{
+    top: -39px;
+    right: 0px;
+    left: 175px;
+    background-color: #fff;
+    
+}
+.input-group-btn .glyphicon-calendar:before{
+    color: #fe5e3c;
+    font-weight: bold;
+    
+}
+.input-group-btn .btn.btn-default{
+    background-color: #fff;
+    font-size:15px;
+}
+.form-inline label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start; 
+    -webkit-align-items: flex-start; 
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: start; 
+    -webkit-justify-content:start ;
+    -ms-flex-pack: start; 
+    justify-content: flex-start; 
+     margin-bottom: 0;
+	 width:100%;
+  }
+
+.user-result-list {
+    background: #FFF;
+}
+.user-result-list-inner {
+    padding: 15px 10px;
+}
+.help-popup {
+    float: right;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.error-input {
+    padding: 0;
+}
+.help-popup {
+    float: left;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    top: 0;
+}
+.result-set-info-top {
+    padding: 10px 0 0 0px;
+    height: 32px;
+}
+.help-popup a {
+    padding-right: 6px;
+    padding-left: 6px;
+    border-right: 1px solid #b9aeae;
+} 
+.fa.fa-info-circle{
+    color: #fe5e3c;
+    font-size: 18px;
+    margin-left: 5px;
+}
+.help-popup {
+    cursor: pointer;
+}
+.table{
+    border: 1px solid #D7D7D7 !important;
+}
+.table thead th, .table tbody td {
+    border-color: #c7c7c7;
+    color: #373a3c;
+    font-weight:normal;
+}
+.table thead th {
+    background-color: #f9f9f9 !important;
+}
+.table thead th.txtAlignC {
+    text-align: center !important;
+}
+.table tbody td { 
+    padding: .65em !important;
+    text-align: left !important;
+    padding-left: 15px !important;
+	
+	font-size: 13px;
+}
+.table .subHeader td {
+    background-color: #E5F1FD !important;
+}
+.table tbody  td.fontWtBold{
+    font-weight:bold;
+    text-align:right!important;
+}
+.table tbody  td.txtAlignR{
+    text-align:right!important;
+}
+
+.table tbody  td.padR{
+    padding-right:15px!important;
+}
+.iconFont {
+    color:#74A6CC;
+}
+.fa-file-o, .fa-check-circle, .fa-suitcase, .fa-times-circle-o, .fa-plus-circle{
+    color:#74A6CC;
+}
+
+/* bypartner popover */
+.bypartnerpopover {
+    position: absolute;
+    left:8.5%;
+    top:13px;
+    cursor: pointer;
+}
+
+.bypopover {
+    width:190px !important;
+    font-size:11.6px !important;
+}
+.popover {
+    margin-left: 20px;
+    box-shadow: 1px 1px 10px 2px #ddd !important;
+}

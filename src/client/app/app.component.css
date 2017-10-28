@@ -1,0 +1,27 @@
+
+
+.sos-ui-footer{
+  background-color:#014B7C;
+  min-height: 60px;    
+  color:#fff;
+  font-size:0.8rem;
+  
+}
+
+.footer-text-wrapper-box{
+  display: block;
+  text-align: center;
+  height: 60px; line-height: 60px;   
+}
+.footer-text-wrapper{
+  height:17px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) and (min-height: 600px) and (max-height: 900px ) {
+  .sos-ui-footer{
+    min-height: 52px;
+  }
+  .footer-text-wrapper-box{
+    height: 52px; line-height: 52px;   
+  }
+}

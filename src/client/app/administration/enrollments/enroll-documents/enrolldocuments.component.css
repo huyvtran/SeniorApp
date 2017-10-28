@@ -1,0 +1,58 @@
+h1, h2, h3 {
+    font: Segoe UI;
+    color: #2f2f2f;
+}
+h1 {
+    font-weight: 400;
+    font-size: 24px;
+    padding-bottom: 30px;
+    margin-left: -15px;
+}
+h2 {
+    font-weight: 600;
+    font-size: 15px;
+}
+h3 {
+    font-weight: normal;
+    font-size: 13px;
+}
+.md-padding-top {
+    padding-top: 70px;
+}
+.sd-padding-top {
+    padding-top: 20px;
+}
+.sd-margin-top {
+    margin-top: 20px;
+}
+
+.block-group {
+    background-color: #f0f0f0;
+    border: 1px solid #d7d7d7;
+    margin-top: 10px;
+    padding: 15px 16px 2px 16px;
+    /* box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important; */
+}
+.block-group h2 {
+    padding-bottom: 6px;
+}
+.block-group-invert {
+    background-color: #FFF;
+    border-top: 1px solid #d7d7d7;
+}
+
+.documents-container {
+    padding: 10px;
+}
+.pdf-container {
+    margin-top: 10px;
+}
+.fa-exclamation-triangle {
+    color:#ff0000;
+    font-size:22px;
+    padding-right:10px;
+}
+.error-message {
+    color: #ff0000; 
+    font-size: 17px;
+}

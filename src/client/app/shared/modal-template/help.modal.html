@@ -1,0 +1,80 @@
+<div bsModal #helpModal="bs-modal" class="modal fade container-fluid no-gutters" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                    <img src="./assets/images/closebtn.gif"/>
+                </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-4 mr-4 help-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>ACN - Application Control Number, a unique number identifying the electronic enrollment</li>
+                            <li>Opt In - Indicates if applicant opted for electronic communication</li>
+                            <li>App Status - Status of the applicant enrollment</li>
+                            <li>Version - Identifies the application form version</li>
+                            <li>Brand - Brand associated with the application</li>
+                            <li>ST - State of the applicant</li>
+                            <li>First - Applicant first name</li>
+                            <li>MI - Applicant middle initial</li>
+                            <li>Last - Applicant last name</li>
+                            <li>Req Eff - Requested effective date for the enrollment</li>
+                            <li>Fut Req Eff - Future requested effective date for the enrollment</li>
+                            <li>Submit Partner - Partner agency that submitted the application</li>
+                            <li>Parent Producer - Parent producer id of the agent on file</li>
+                            <li>Producer - Producer id of the agent on file</li>
+                            <li>APAC ID - APAC agent identifier</li>
+                            <li>App Source - Source of the application</li>
+                            <li>EB Source - Source of the enrollment (or) back end system</li>
+                            <li>EB Reply - The reply status from the enrollment (or) back end system</li>
+                            <li>Status Reason - Reason for a cancellation</li>
+                            <li>Expiration - Application expiration timestamp</li>
+                            <li>Submitted - Application submitted timestamp</li>
+                            <li>Cancelled - Application cancelled timestamp</li>
+                            <li>Email Sent - Submitted email sent timestamp</li>
+                            <li>Last Reminder - Last timestamp when a reminder email was sent to applicant</li>
+                            <li>App Handover - Timestamp when application handover notification to Siebel was sent successful</li>
+                            <li>Last Batch - Last batch timestamp for backend system status updates</li>
+                            <li>ACS Sent - ACS sent timestamp</li>
+                            <li>MediSys Sent - MediSys sent timestamp</li>
+                            <li>Imaging Sent - Imaging sent timestamp</li>
+                            <li>HOV Sent - HOV sent timestamp</li>
+                            <li>COSMO Sent - COSMO sent timestamp</li>
+                            <li>Agency - Agency Name of the agent on file</li>
+                            <li>Agent TIN - Tax identification number of the agent on file</li>
+                            <li>Agent First - First name of the agent on file</li>
+                            <li>Agent MI - Middle initial of the agent on file</li>
+                            <li>Agent Last - Last name of the agent on file</li>
+                            <li>Agent State ID - State ID of the agent on file</li>
+                            <li>Parent Agency - Parent agency of the agent on file</li>
+                            <li>Parent Agent TIN - Parent agent tax identification number</li>
+                            <li>Parent Agent First - Parent agent first name</li>
+                            <li>Parent Agent MI - Parent agent middle initial</li>
+                            <li>Parent Agent Last - Parent agent last name</li>
+                            <li>Parent Agent State ID - Parent agent state ID</li>
+                            <li>Applying For Others - Applying for others flag</li>
+                            <li>Agent Assisted - Agent assisted flag</li>
+                            <li>Agent Submitted - Agent submitted flag</li>
+                            <li>Working With Agent - Working With an agent flag</li>
+                            <li>HICN - Health Insurance Claim Number</li>
+                            <li>Updated ID - User ID associated with last application change</li>
+                            <li>Updated - Last updated timestamp</li>
+                            <li>Created ID - User ID associated with creation of application</li>
+                            <li>Product ID - Product ID</li>
+                            <li>Product Name - Product Name</li>
+                            <li>Created - Application creation timestamp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="modal-footer">
+            </div> -->
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

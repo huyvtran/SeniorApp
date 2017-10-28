@@ -1,0 +1,14 @@
+<nav class="navbar fixed-top breadcrumb-wrapper" *ngIf="((breadCrumbUrl | json) != '{}')">
+  <div class="container-fluid breadcrumb-content no-gutters">
+    <div>
+      <ol class="breadcrumb">
+        <li><a routerLink="/home" class="breadcrumb-a">Home</a></li>
+        <li *ngFor="let breadcrumb of breadCrumbUrl">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          <a *ngIf='breadcrumb.link' routerLink="{{ breadcrumb.link }}" class="breadcrumb-a current">{{ breadcrumb.label }}</a>
+          <a *ngIf='!breadcrumb.link' class="breadcrumb-a current">{{ breadcrumb.label }}</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</nav>

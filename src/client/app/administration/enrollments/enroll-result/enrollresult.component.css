@@ -1,0 +1,96 @@
+.block-group {
+    background-color: #f0f0f0;
+    border: 1px solid #d7d7d7;
+    margin-top: 10px;
+    padding: 15px 16px 2px 16px;
+}
+.accordion-icon {
+    position: absolute;
+    right: 15px;
+    top: 7px;
+}
+.formHolder{
+    width:90%;
+}
+.block-group h2 {
+    padding-bottom: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #2f2f2f;
+    cursor:pointer;
+}
+.block-group-invert {
+    background-color: #FFF;
+    width:100%;
+    padding: 30px 20px 30px 20px;
+}
+.expand-icon, .collapse-icon {
+    height: 29px;
+    width:29px;
+    display:inline-block;
+}
+.expand-icon {
+    background: url(./assets/images/accordion-closed.png) no-repeat center;
+} 
+.collapse-icon {
+    background: url(./assets/images/accordion-open-new.png) no-repeat center;
+}
+.user-result-list {
+    background: #FFF;
+}
+.user-result-list-inner {
+    padding: 15px 10px;
+}
+.help-popup {
+    float: right;
+    cursor: pointer;
+    position: absolute;
+    right: 28%;
+    top: 11px;
+}
+.error-input {
+    padding: 0;
+}
+.result-set-info-top {
+    padding: 10px 0 0 0px;
+    height: 32px;
+}
+.enrollment-tab form {
+    width: 100%;
+}
+.icon-flipped {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    color: #fe5e3c;
+    font-size: 19px;
+}
+.help-popup a {
+    padding-right: 6px;
+    padding-left: 6px;
+}
+.help-popup span.seperation {
+    border-right: 1px solid #b9aeae;
+}
+.help-popup span[title] {
+    display: inline-block;
+}
+a.disabled { 
+    cursor: not-allowed;
+    pointer-events: none;
+    text-decoration: none;
+}
+a.disabled .fa {
+    opacity: .3;
+}
+.resend-message {
+    padding: 5px 0px 5px 10px;
+    margin: 0;
+}
+.success {
+    color: green;
+}
+.failure {
+    color:red;
+}

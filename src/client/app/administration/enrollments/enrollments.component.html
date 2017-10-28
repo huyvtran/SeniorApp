@@ -1,0 +1,26 @@
+<div class="container-fluid no-gutters tab-content">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group">
+        <h2 (click)="toggleSearchAccordance()">
+            Enrollments
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+            </a>
+        </h2>
+        <div class="row block-group-invert" [hidden]='showForm'>
+            <div class="col-md enrollment-tab-container">
+                <p-tabView class="enrollment-tab" (onChange)='resetService($event)' [activeIndex]="activeTabIndex">
+                    <p-tabPanel header="SEARCH" class="enrollment-inner-tab">
+                        <sd-enroll-search (searchNotify)='onSearchNotify($event)'></sd-enroll-search>
+                    </p-tabPanel>
+                    <p-tabPanel header="ADVANCED" class="enrollment-inner-tab-advanced">
+                        <sd-enroll-advanced (advancedSearchNotify)='onAdvancedNotify($event)'></sd-enroll-advanced>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <sd-enroll-result [searchList]='searchResult' [toggleSearchAccordanceID]='showForm' [searchObj] = 'searchCriteria' (onResultToggle)='doToggle($event)'></sd-enroll-result>
+    </div>
+</div>

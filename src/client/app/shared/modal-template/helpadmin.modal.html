@@ -1,0 +1,41 @@
+<div bsModal #helpAdminModal="bs-modal" class="modal fade container-fluid no-gutters" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close-icon pull-right" aria-label="Close" (click)="hide()">
+                    <img src="./assets/images/closebtn.gif"/>
+                </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-4 mr-4 help-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>ACN - Application Control Number, a unique number identifying the electronic enrollment</li>
+                            <li>App Status - Status of the applicant enrollment</li>
+                            <li>Version - Identifies the application form version</li>
+                            <li>ST - State of the applicant</li>
+                            <li>First - Applicant first name</li>
+                            <li>Last - Applicant last name</li>
+                            <li>EB Reply - The reply status from the enrollment (or) back end system</li>
+                            <li>ACS Sent - ACS sent timestamp</li>
+                            <li>MediSys Sent - MediSys sent timestamp</li>
+                            <li>Imaging Sent - Imaging sent timestamp</li>
+                            <li>HOV Sent - HOV sent timestamp</li>
+                            <li>COSMO Sent - COSMO sent timestamp</li>
+                            <li>HICN - Health Insurance Claim Number</li>
+                            <li>Product ID - Product ID</li>
+                            <li>Product Name - Product Name</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="modal-footer">
+            </div> -->
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

@@ -1,0 +1,278 @@
+<div class="container-fluid no-gutters" id="entrolldetails-container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2>
+            Details - ACN : {{ acn }}
+
+        </h2>
+        <div class="container-fluid no-gutters block-group-invert search-criteria detailTables">
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto ">
+                <h2>
+                    Demographics
+
+                </h2>
+
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Middle Initial</th>
+                                <th>DOB</th>
+                            </tr>
+                            <tr>
+                                <td> {{ data?.firstName }} </td>
+                                <td> {{ data?.lastName }} </td>
+                                <td>{{ data?.middleInitial }}</td>
+                                <td>{{ data?.dob }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age</th>
+                                <th>Age at Submission</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.age }}</td>
+                                <td>{{ data?.ageDuringSubmission }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto detailTables">
+                <h2>
+                    Application
+
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>ACN</th>
+                                <th>Status</th>
+                                <th>Version</th>
+                                <th>State</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.acn }}</td>
+                                <td>{{ data?.applicationStatus }}</td>
+                                <td>{{ data?.applicationVersion }}</td>
+                                <td>{{ data?.state }}</td>
+                            </tr>
+                            <tr>
+                                <th>Req Eff</th>
+                                <th>Fut Req Eff</th>
+                                <th>Applying for Others</th>
+                                <th>HICN</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.requestEffectiveDate }}</td>
+                                <td>{{ data?.futureReqEffDate }}</td>
+                                <td>{{ data?.applyForOthers }}</td>
+                                <td>{{ data?.medicareClaimNo }}</td>
+                            </tr>
+                            <tr>
+                                <th>Product/Plan ID</th>
+                                <th>Product Name</th>
+                                <th colspan="2">Product Description</th>
+
+                            </tr>
+                            <tr>
+                                <td>{{ data?.productId }}</td>
+                                <td>{{ data?.productDisplayName }}</td>
+                                <td colspan="2">{{ data?.productDesc }}</td>
+
+                            </tr>
+                            <tr>
+                                <th>Plan Type</th>
+                                <th>Product Type</th>
+                                <th>Coverage Type</th>
+                                <th></th>
+
+                            </tr>
+                            <tr>
+                                <td>{{ data?.planType }}</td>
+                                <td>{{ data?.productType }}</td>
+                                <td>{{ data?.coverageType }}</td>
+                                <td></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto detailTables">
+                <h2>
+                    Partners
+
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>Create Partner</th>
+                                <th>Submit Partner</th>
+                                <th>Parent Producer</th>
+                                <th>Producer</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.createPartnerID }}</td>
+                                <td>{{ data?.submitPartnerID }}</td>
+                                <td>{{ data?.parentProducerID }}</td>
+                                <td>{{ data?.producerID }}</td>
+                            </tr>
+                            <tr>
+                                <th>APAC ID</th>
+                                <th>App Source</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.apacCallID }}</td>
+                                <td>{{ data?.appSource }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto detailTables">
+                <h2>
+                    Milestones
+
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>Submitted</th>
+                                <th>Cancelled</th>
+                                <th>Expiration</th>
+                                <th>Email Sent</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.submittedTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.cancelledTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.expirationDate | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.emailSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Last Reminder</th>
+                                <th>App Handover</th>
+                                <th>Last Batch</th>
+                                <th>ACS Sent</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.lastReminderSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.appHandOverTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.lastBatchTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.acsSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Medisys Sent</th>
+                                <th>Imaging Sent</th>
+                                <th>HOV Sent</th>
+                                <th>Updated ID</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.medisysSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.imagingSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.hovSentTimeStamp | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.modifiedBy }}</td>
+                            </tr>
+                            <tr>
+                                <th>Updated</th>
+                                <th>Created ID</th>
+                                <th>Created</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.modifiedOn | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td>{{ data?.createdBy }}</td>
+                                <td>{{ data?.createdOn | dateX:'YYYY-MM-DD HH:mm:ss.SSS' }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto detailTables">
+                <h2>
+                    Routing Details
+
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>EB Source</th>
+                                <th>EB REply</th>
+                                <th>Status Reason</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.ebSource }}</td>
+                                <td>{{ data?.ebReply }}</td>
+                                <td>{{ data?.statusReason }}</td>
+                                <td> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 block-group search-criteria-block mx-auto detailTables">
+                <h2>
+                    Agent Information
+
+                </h2>
+                <div class="container-fluid no-gutters block-group-invert search-criteria ">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>Agent Assisted</th>
+                                <th>Agent Submitted</th>
+                                <th>Working with Agent</th>
+                                <th>Agency</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.agentAssisted }}</td>
+                                <td>{{ data?.agentSubmitted }}</td>
+                                <td>{{ data?.workingWithAgent }}</td>
+                                <td>{{ data?.agencyID }}</td>
+                            </tr>
+                            <tr>
+                                <th>Agent TIN</th>
+                                <th>Agent Name</th>
+                                <th>Agent State ID</th>
+                                <th>Parent Agency</th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.agentTIN }}</td>
+                                <td>{{ data?.agencyName }}</td>
+                                <td>{{ data?.agentStateID }}</td>
+                                <td>{{ data?.parentAgentID }}</td>
+                            </tr>
+                            <tr>
+                                <th>Parent Agent TIN</th>
+                                <th>Parent Agent Name</th>
+                                <th>Parent Agent State ID</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>{{ data?.parentAgentTIN }}</td>
+                                <td>{{ data?.parentAgencyName }}</td>
+                                <td>{{ data?.parentAgentStateID }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

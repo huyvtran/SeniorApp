@@ -1,0 +1,53 @@
+<div class="row no-gutters site-content">
+    <div class="container no-gutters mx-auto my-auto">
+        <div class="container-fluid no-gutters page-header">
+            <h1>Analytics</h1>
+        </div>
+        <div class="container-fluid no-gutters tab-wrapper analytics-submenu" >
+            <div class="tab">
+                <span class="tab-navigator" (click)="rotateMenuToLeft()">
+                    <span class="left-arrow"></span>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.byPartnerTabOvered" (mouseout)="toggleTabHighlight('byPartnerTabOvered',false)" 
+                        (mouseover)="toggleTabHighlight('byPartnerTabOvered',true)" class="tabs {{ tabIndexing['1'].cssClass }} ">
+                   <button   [routerLink]="['byPartner']" type="button" class="active" (click)="triggerTabSelection('byPartnerTabOvered')" >BY PARTNER</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.bySystemTabOvered" (mouseout)="toggleTabHighlight('bySystemTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('bySystemTabOvered',true)" class="tabs {{ tabIndexing['2'].cssClass }} ">
+                    <button [routerLink]="['bySystem']" type="button" class="active" (click)="triggerTabSelection('bySystemTabOvered')">BY SYSTEM</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.byProductTypeTabOvered" (mouseout)="toggleTabHighlight('byProductTypeTabOvered',false)" 
+                    (mouseover)="toggleTabHighlight('byProductTypeTabOvered',true)" class="tabs {{ tabIndexing['3'].cssClass }} ">
+                    <button [routerLink]="['byProductType']" type="button" class="active" (click)="triggerTabSelection('byProductTypeTabOvered')" >BY PRODUCT-TYPE</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.leadsTabOvered" (mouseout)="toggleTabHighlight('leadsTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('leadsTabOvered',true)" class="tabs {{ tabIndexing['4'].cssClass }} ">
+                    <button [routerLink]="['leads']" type="button" class="active" (click)="triggerTabSelection('leadsTabOvered')">LEADS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.quotesTabOvered" (mouseout)="toggleTabHighlight('quotesTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('quotesTabOvered',true)" style='display:none;' class="tabs {{ tabIndexing['5'].cssClass }} ">
+                    <button [routerLink]="['quotes']" type="button" class="active" (click)="triggerTabSelection('quotesTabOvered')">QUOTES</button>
+                </span>  
+                <span [class.tab-menu-bottom-arrow]="tabs.convertedTabOvered" (mouseout)="toggleTabHighlight('convertedTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('convertedTabOvered',true)" style='display:none;' class="tabs {{ tabIndexing['6'].cssClass }} ">
+                    <button [routerLink]="['converted']" type="button" class="active" (click)="triggerTabSelection('convertedTabOvered')">CONVERTED</button>
+                </span> 
+                <span [class.tab-menu-bottom-arrow]="tabs.latencyTabOvered" (mouseout)="toggleTabHighlight('latencyTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('latencyTabOvered',true)" style='display:none;' class="tabs {{ tabIndexing['7'].cssClass }} ">
+                    <button [routerLink]="['latency']" type="button" class="active" (click)="triggerTabSelection('latencyTabOvered')">LATENCY</button>
+                </span> 
+                <span [class.tab-menu-bottom-arrow]="tabs.totalProfileTabOvered" (mouseout)="toggleTabHighlight('totalProfileTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('totalProfileTabOvered',true)"  class="tabs {{ tabIndexing['8'].cssClass }} ">
+                    <button [routerLink]="['totalProfile']" type="button" class="active" (click)="triggerTabSelection('totalProfileTabOvered')">TOTAL PROFILE</button>
+                </span> 
+                <span class="tab-navigator" (click)="rotateMenuToRight()">
+                        <span class="right-arrow"></span>
+                </span>				
+            </div>
+        </div>
+
+        <div class="container-fluid no-gutters tab-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

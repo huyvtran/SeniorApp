@@ -1,0 +1,22 @@
+.sos-ui-header{
+  background-color:#092D4F;
+  min-height: 60px;
+}
+
+.container-fluid.sos-ui-site-content{
+  padding-top:60px;
+  /* padding-bottom:60px; */
+  padding-bottom:60px;
+  padding-left: 7%;
+  padding-right: 7%;
+  overflow-y: auto;
+  height:100%;
+}
+
+.page-top-bottom-space {
+  margin-top:7% !important; 
+  padding-bottom:11% !important;
+}
+.diableDiv {
+  z-index: 1041;
+}

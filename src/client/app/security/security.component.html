@@ -1,0 +1,109 @@
+<div class="row no-gutters site-content ">
+    <div class="security-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                    <h1>{{ tabTitle }}</h1>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group">
+                    <h2 (click)="showForm=!showForm">
+                        User Password Reset
+                        <a class="accordion-icon">
+                            <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+                        </a>
+                    </h2>
+                    <form  [formGroup]="securityForm" class="row block-group-invert" 
+                    role="form" [hidden]='showForm' (submit)="searchUser()"  novalidate>
+                        <!-- <div class="col-lg-12 col-md-12 col-sm-12 error-input">
+                            <span class="error-message" *ngIf="userNameError"><i class="fa fa-exclamation-triangle"></i>{{ userNameError }}</span>
+                            <span class="error-message" *ngIf="emailError"><i class="fa fa-exclamation-triangle"></i> {{ emailError }}</span>
+                        </div> -->
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="form-group sd-padding-top" >
+                                <label for="firstName"><h3 class="pass-icon">FIRST NAME</h3></label>
+                                <input type="text" OnlyAlphabet=true  class="form-control"  autofocus
+                                    [(ngModel)]="userObj.firstName" placeholder="Enter First Name" formControlName="firstName"  #firstNameInput
+                                    id='firstName' />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!userObj.firstName" class="clear-close" (click)="userObj.firstName=''"
+                                />
+                                <security-error-messages [control]="securityForm.controls.firstName" [htmlElem] = "firstNameInput"></security-error-messages>
+                                <!--<small *ngIf="f.submitted && !userObj.firstName">First name required</small>-->
+                                <!--Only alphabets are allowed-->
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="form-group sd-padding-top">
+                                <label for="lastName"><h3 class="pass-icon">LAST NAME</h3></label>
+                                <input type="text" OnlyAlphabet=true formControlName="lastName" #lastNameInput
+                                    class="form-control" [(ngModel)]="userObj.lastName" placeholder="Enter Last Name" />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!userObj.lastName" 
+                                    class="clear-close" (click)="userObj.lastName=''"  />
+                                 <security-error-messages [control]="securityForm.controls.lastName" [htmlElem] = "lastNameInput"></security-error-messages>
+                                <!--<small *ngIf="f.submitted && !userObj.lastName">Last name required</small>-->
+                                <!--Only alphabets are allowed-->
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="form-group sd-padding-top">
+                                <label for="dateOfBirth"><h3>DATE OF BIRTH</h3></label>
+                                <p-calendar placeholder="mm/dd/yyyy" [(ngModel)]="userObj.dob" formControlName="dateOfBirth" [maxDate]="maxDateDob" dateFormat="mm/dd/yy"
+                                    showIcon="true" icon="fa-calendar" [inputStyle]="calendarTextBoxMarginBtm" inputStyleClass="form-control" [inline]="false"
+                                    [monthNavigator]="true" [yearNavigator]="true" [yearRange]="dateRange" #dateOfBirth></p-calendar>
+                                    <security-calendar-error-messages  [control]="securityForm.controls.dateOfBirth" [htmlElem] = "dateOfBirth">
+                                    </security-calendar-error-messages>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="form-group sd-padding-top">
+                                <label for="email"><h3>EMAIL</h3></label>
+                                <input type="email" class="form-control" formControlName="email" #emailInput 
+                                 [(ngModel)]="userObj.email" placeholder="Enter Email ID" />
+                                 <img src="./assets/images/clear-close-icon.png" [hidden]="!userObj.email" 
+                                      class="clear-close" (click)="userObj.email=''"  />
+                                 <security-error-messages [control]="securityForm.controls.email" [htmlElem] = "emailInput"></security-error-messages>
+                                <!--"Please enter a valid email address"-->
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                            <div class="form-group text-center"><!--[disabled]="!securityForm.valid" -->
+                                <button class="search-button" type="submit" ></button>
+                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetForm();"></button>
+                                <!-- <input class="clear-button" type="reset" name="clear" (click)="resetResult();" value="Clear All" /> -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{'empty-result': !userSearchList }">
+                    <h2 (click)="showForm = !showForm">
+                        Result <span class="countmsgfnt">{{ countMessage }}</span>
+                        <a class="accordion-icon">
+                            <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+                        </a>
+                    </h2>
+                    <div class="row user-result-list" *ngIf="userSearchList && userSearchList.length > 0" [hidden]='!showForm'>
+                        <div class="col-12 user-result-list-inner ui-paginator-list-security-top security-tap">
+                            <p-dataTable [value]="userSearchList" [rows]="10" [paginator]="true" [pageLinks]="3" 
+                                (onPage)="paginationInfo($event)" (onFilter)="filterResult($event)" [alwaysShowPaginator]="false">
+                                <p-column field="firstName" header="FIRST NAME" [sortable]="true" [filter]="true" ></p-column>
+                                <p-column field="lastName" header="LAST NAME" [sortable]="true" [filter]="true" ></p-column>
+                                <p-column field="dob" header="DOB" [sortable]="true" [filter]="true" ></p-column>
+                                <p-column field="gender" header="GENDER" [sortable]="true" [filter]="true" ></p-column>
+                                <p-column field="email" header="EMAIL ID" [sortable]="true" [filter]="true" ></p-column>
+                                <p-column field="details" header="PASSWORD RESET">
+                                    <ng-template let-userRow="rowData" pTemplate="body">
+                                        <a (click)="viewDetailsModal.show()" class="table-hidden-content centalign"><img src="./assets/images/view-icon.png" /></a>
+                                        <sd-viewdetails #viewDetailsModal [detailsData]="userRow" [webGuid]="userRow.webGuid" [title]="'User Details'"></sd-viewdetails>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                        <div class="result-set-info">{{ paginateMessage }}</div>
+                    </div>
+                    <div class="row user-result-list error-input" style="padding:0px 10px 10px 10px;" *ngIf="noUsermessage" [hidden]='!showForm'>
+                        <span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noUsermessage }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

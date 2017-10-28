@@ -1,0 +1,43 @@
+<div class="container-fluid toolbar-container row">
+  <div class="menu-nav-container col-md-4" [ngClass]="{'diableDiv': logOutClick}">
+    <div class="dropdown open-nav-btn closeicon" *ngIf="!sidebarOpen">
+      <span class="dropdown-toggle" id="admin-profile-drop1" data-toggle="dropdown"></span>
+      <div *ngIf="sidebarOpen"><span class="closebtn" (click)="closeNav()">&times;</span></div>
+      <div class="panel-collapse collapse dropdown-menu sidenav" role="menu" aria-labelledby="admin-profile-drop1">
+        <ul class="nav flex-column collapse navbar-collapse">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" (click)="closeNav()"><img src="./assets/images/menu-dashh.png" /> <span class="menu_link_text">Dashboard</span> <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home/security" (click)="closeNav()"><img src="./assets/images/menu-security.png" /> <span class="menu_link_text">Security</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home/reports" (click)="closeNav()"><img src="./assets/images/menu-reports.png" /> <span class="menu_link_text">Reports</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home/analytics" (click)="closeNav()"><img src="./assets/images/menu-analytics.png" /> <span class="menu_link_text">Analytics</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home/administration/enrollment/search" (click)="closeNav()"><img src="./assets/images/menu-administration.png" /> <span class="menu_link_text">Administration</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="toolbar-logo col-md-4" [ngClass]="{'diableDiv': logOutClick}">
+    <a routerLink="/home/dashboard"><img src="./assets/images/SOLS-Logo.png" /></a>
+  </div>
+  <div class="toolbar-user col-md-4">
+    <div class="dropdown pull-right">
+      <span class="dropdown-toggle" id="admin-profile-drop" data-toggle="dropdown" [ngClass]="{'diableDiv': logOutClick}">
+        <i class="fa fa-user-circle-o"></i>
+        Welcome {{ userName }}
+        <i class="fa fa-caret-down"></i>
+      </span>
+      <div class="panel-collapse collapse dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="admin-profile-drop">
+        <div class="logout" (click)="logOutClick = true; logoutModal.show()">Logout &nbsp;<i class="fa fa-sign-out"></i></div>
+      </div>
+      <sd-logout #logoutModal [title]="'Logout'" (logOutClickFlag) = "getLogoutClick($event)"></sd-logout>
+    </div>
+  </div>
+</div>

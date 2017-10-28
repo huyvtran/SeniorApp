@@ -1,0 +1,115 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showForm = !showForm">
+                By System
+                <a class="accordion-icon" >
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+                </a>             
+        </h2>
+        <div class="bysystempopover"><i class="fa fa-info-circle"[popover]="popTemplate" tabindex="1"
+            placement="bottom" triggers="focus"></i>
+        <ng-template #popTemplate><div class="bypopover" >This report provides a summary of enrollments submitted successfully to the backend systems - ACS, Medisys and HOV. The sum totals are categorized by products - Medicare Advantage, Medicare Supplement and PDP.</div></ng-template></div>
+        <div class="block-group-invert" [hidden]='showForm'>
+            <div class="content no-gutters mx-auto formHolder">
+                <form [formGroup]="bySystemForm" name="bySystemForm" novalidate class="form-inline dateiconadjt" (submit)="searchReport()">
+                    <div class="col-lg-6 col-md-8 col-sm-11">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="fromDate" class="calendarFieldLabel"><h3 class="pass-icon">FROM</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="fromDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                                <analytics-calendar-error-messages [control]="bySystemForm.controls.fromDate" [htmlElem] = "fromDateInput">
+                                </analytics-calendar-error-messages> 
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-8 col-sm-11">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="toDate" class="calendarFieldLabel"><h3 class="pass-icon">TO</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                               <analytics-calendar-error-messages [control]="bySystemForm.controls.toDate" [htmlElem] = "toDateInput">
+                                </analytics-calendar-error-messages> 
+                        </div>
+                    </div>
+                    <div class="row no-gutters actionControlsContainer">
+                        <div class="form-group text-center mx-auto">
+                            <button class="search-button" type="submit"></button>
+                            <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetBySystemForm();"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportBySystemSearchList }">
+        <h2 (click)="showForm = !showForm">
+            Result {{ countMessage }}
+            <a class="accordion-icon" >
+                <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list"  [hidden]='!showForm' *ngIf=" reportBySystemSearchList && reportBySystemSearchList.length > 0">
+                <div class="col-12">
+                        <div class="result-set-info-top"></div>
+                        <span class="help-popup">
+                        <!-- <a (click)="helpConvertedModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                            <sd-converted-help #helpConvertedModal [title]="'Help'"></sd-converted-help>  -->
+                        <a><img src="./assets/images/download-icon_27.png" (click)="saveDownloadData()" alt="download" title="Download" /></a> 
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top advanced-result noresultfnd1">
+                        <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>DATE</th>
+                                        <th>PARTNER</th>
+                                        <th colspan="3" class='txtAlignC'>MEDICARE ADVANTAGE</th>
+                                        <th colspan="4" class='txtAlignC'>MEDICARE SUPPLEMENT</th>
+                                        <th colspan="3" class='txtAlignC'>PDP</th>
+                                      </tr>
+                                    </thead> 
+                                    <tbody>
+                                      <tr class="subHeader">
+                                        <td colspan="2"></td>
+                                        <td class='txtAlignC'>ACS</td>
+                                        <td class='txtAlignC'>Medisys</td>
+                                        <td class='txtAlignC'>Total</td>
+                                        <td class='txtAlignC'>Hov</td>
+                                        <td class='txtAlignC'>Medisys</td>
+                                        <td class='txtAlignC'>Cosmo</td>
+                                        <td class='txtAlignC'>Total</td>
+                                        <td class='txtAlignC'>ACS</td>
+                                        <td class='txtAlignC'>Medisys</td>
+                                        <td class='txtAlignC'>Total</td>
+                                      </tr>
+                                      <tr *ngFor="let bySystemRow of reportBySystemSearchList">
+                                            <td>{{ bySystemRow.dateStr }}</td>
+                                            <td class="padR">{{ bySystemRow.partner }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.maAcs }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.maMedisys }}</td>
+                                            <td class='txtAlignC fontWtBold'>{{ bySystemRow.maTotal }}</td>
+            
+                                            <td class='txtAlignC'>{{ bySystemRow.msHov }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.msMedisys }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.msCosmo }}</td>
+                                            <td class='txtAlignC fontWtBold'>{{ bySystemRow.msTotal }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.pdpAcs }}</td>
+                                            <td class='txtAlignC'>{{ bySystemRow.pdpMedisys }}</td>
+                                            <td class='txtAlignC fontWtBold'>{{ bySystemRow.pdpTotal }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                    </div>
+                </div>
+                <!-- <div class="result-set-info">1-10 of 85 Results.</div> -->
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showResult'>
+                <div class="col-12 error-input"><span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }} </span></div>
+            </div>
+        </div>
+    </div>
+</div>

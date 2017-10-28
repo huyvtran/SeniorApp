@@ -1,0 +1,190 @@
+<div class="container-fluid no-gutters">
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            Search
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showSearchCriteria, 'collapse-icon': !showSearchCriteria }"></span>
+            </a>
+        </h2>
+
+        <div class="container-fluid no-gutters block-group-invert search-criteria paymentCriteria" [hidden]='showSearchCriteria'>
+            <h4>Search using any of the below criteria</h4>
+            <div class="col-md">
+
+                <p-tabView orientation="left" (onChange)="resetResult();resetAllFormBuilders();">
+                    <p-tabPanel header="Application Status">
+                        <div class="row" style="padding-top:0px;">
+                            <form [formGroup]="reportPaymentsByDateForm" (submit)="paymentReportByDate()" role="form" class="form-inline" novalidate>
+                                <div class="col-md-10 offset-md-1">
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6 col-sm-9">
+                                            <div class="form-group sd-padding-top primNgcalendarField">
+                                                <label for="fromDate" class="calendarFieldLabel"><h3 class="pass-icon">FROM</h3></label>
+                                                <p-calendar (onBlur)="applyMarkAsTouchedByDateForm()" placeholder="mm/dd/yyyy" dateFormat="mm/dd/yy" showIcon="true" icon="fa-calendar"
+                                                    [maxDate]="maxFromDate" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="fromDate"
+                                                    inputStyleClass="form-control" [inline]="false" [monthNavigator]="true" name="fromDate"
+                                                    [yearNavigator]="true" yearRange="2000:2017" formControlName="fromDate" #fromDateInput></p-calendar>
+                                                <reports-calendar-error-messages [control]="reportPaymentsByDateForm.controls.fromDate" [htmlElem]="fromDateInput">
+                                                </reports-calendar-error-messages>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-9">
+                                            <div class="form-group sd-padding-top primNgcalendarField">
+                                                <label for="toDate" class="calendarFieldLabel"><h3 class="pass-icon">TO</h3></label>
+                                                <p-calendar (onBlur)="applyMarkAsTouchedByDateForm()" placeholder="mm/dd/yyyy" dateFormat="mm/dd/yy" showIcon="true" icon="fa-calendar"
+                                                    [maxDate]="maxToDate" [inputStyle]="calendarTextBoxMarginBtm" [(ngModel)]="toDate"
+                                                    inputStyleClass="form-control" [inline]="false" [monthNavigator]="true" name="toDate"
+                                                    [yearNavigator]="true" yearRange="2000:2017" formControlName="toDate" #toDateInput></p-calendar>
+                                                <reports-calendar-error-messages [control]="reportPaymentsByDateForm.controls.toDate" [htmlElem]="toDateInput">
+                                                </reports-calendar-error-messages>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-9">
+                                            <div class="form-group sd-padding-top">
+                                                <label for="appStatus" class="mb-2"><h3>APP STATUS</h3></label>
+                                                <!--[ngModelOptions]="{standalone: true}" -->
+                                                <p-multiSelect [options]="statusList" formControlName="appStatus" [(ngModel)]="selectedStatus" [style]="{'width':'100%'}"
+                                                    styleClass="width100" defaultLabel="Multi Select App Status"></p-multiSelect>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="text-center py-2">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="button" name="clear" (click)="resetResult();resetReportPaymentsByDateForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="ACN">
+                        <div class="row">
+                            <form [formGroup]="reportPaymentsByACNForm" role="form" (submit)="paymentReportByACN()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="acn"><h3 class="pass-icon">ACN</h3></label>
+                                            <textarea type="name" name="acn" class="form-control" [(ngModel)]="userACN" placeholder="Enter ACN" formControlName="acn" #acnInput
+                                                autofocus></textarea>
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userACN" class="clear-close" (click)="userACN=''" />
+                                            <reports-error-messages [control]="reportPaymentsByACNForm.controls.acn" [htmlElem]="acnInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportPaymentsByACNForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Tracking ID">
+                        <div class="row">
+                            <form [formGroup]="reportPaymentsByTrackingIdForm" role="form" (submit)="paymentReportByTrackID()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="trackingNo"><h3 class="pass-icon">TRACKING ID</h3></label>
+                                            <input type="text" class="form-control" autofocus [(ngModel)]="trackingID" placeholder="Enter Tracking ID" formControlName="trackingNo"
+                                                #trackingNoInput />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!trackingID" class="clear-close" (click)="trackingID=''" />
+                                            <reports-error-messages [control]="reportPaymentsByTrackingIdForm.controls.trackingNo" [htmlElem]="trackingNoInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportPaymentsByTrackingIdForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportPaymentList }">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showSearchCriteria, 'collapse-icon': showSearchCriteria }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list" *ngIf="reportPaymentList && reportPaymentList.length > 0" [hidden]='!showSearchCriteria'>
+                <div class="col-12">
+                    <div class="result-set-info-top">{{ paginateMessage }}</div>
+                    <span class="help-popup">
+                        <a (click)="helpModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                        <sd-help #helpModal [title]="'Help'"></sd-help>
+                        <a (click)="downloadCurrentPage()"><img src="./assets/images/download-icon_27.png" alt="download" title="Download" /></a>
+                        <a (click)="dt.exportCSV()"><img src="./assets/images/downloadall_25.png" alt="download" title="Download All" /></a>
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top payment-result noresultfnd2">
+                    <p-dataTable #dt [value]="reportPaymentList" [rows]="10" [paginator]="true" [pageLinks]="3" (onPage)="paginationInfo($event)"
+                        (onFilter)="filterResult($event)" exportFilename="Payments" scrollable="true" scrollWidth="auto" [alwaysShowPaginator]="false"
+                        class="tablebrd">
+                        <p-column field="rowNumber" header="NO" [style]="{'min-width':'92px', 'white-space': 'normal', 'text-align': 'center'}"></p-column>
+                        <p-column header="PAYMENT HISTORY" [style]="{'min-width':'92px','max-width':'92px', 'white-space': 'normal', 'text-align': 'center'}">
+                            <ng-template let-paymentInfo="rowData" pTemplate="body">
+                                <a (click)="paymentHistoryModal.show()" class="table-hidden-content"><img src="./assets/images/view-icon.png" /></a>
+                                <sd-payment-history #paymentHistoryModal [reportType]="'reportPayments'" [appRecordObj]="paymentInfo" [appRecordACN]="paymentInfo.acn"
+                                    [title]="'Payment History'"></sd-payment-history>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="acn" header="ACN" [sortable]="true" styleClass="font-weight-bold" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px','text-align': 'center'}">
+                            <ng-template let-acnInfo="rowData" pTemplate="body">
+                                <a (click)="getPDFReport(acnInfo.acn)" class="table-hidden-content curpoint">{{ acnInfo.acn }}</a>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="applicationStatus" header="APP STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'128px', 'max-width':'128px', 'text-align': 'center'}"></p-column>
+                        <p-column field="appSubStatus" header="APP SUB STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'199px', 'max-width':'199px','text-align': 'center'}"></p-column>
+                        <p-column field="applicationVersion" header="VERSION" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px', 'text-align': 'center'}"></p-column>
+                        <p-column field="applicationState" header="ST" [sortable]="true" [filter]="true" [style]="{'min-width':'70px', 'max-width':'70px','text-align': 'center'}"></p-column>
+                        <p-column field="primaryFirst" header="FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'108px', 'max-width':'108px', 'text-align': 'center'}"></p-column>
+                        <p-column field="primaryLast" header="LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'96px','max-width':'96px', 'text-align': 'center'}"></p-column>
+                        <p-column field="medHOVTSStr" header="HOV SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-hovDate="rowData" pTemplate="body">
+                                {{ hovDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="medCreateDtStr" header="CREATED" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-createdDate="rowData" pTemplate="body">
+                                {{ createdDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="agentFirstName" header="AGENT FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}"></p-column>
+                        <p-column field="agentLastName" header="AGENT LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}"></p-column>
+                        <p-column field="medicareClaimNo" header="HICN" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}"></p-column>
+                        <p-column field="initialPaymentTrackingID" header="INIT PAY TRACK ID" [sortable]="true" [filter]="true" [style]="{'min-width':'168px','max-width':'168px', 'text-align': 'center'}"></p-column>
+                        <p-column field="medInitialPaymentDtStr" header="INIT PAY CRT DATE" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px', 'text-align': 'center'}"></p-column>
+                        <p-column field="ongoingPaymentTrackingID" header="ONGOING PAY TRACK ID" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px','text-align': 'center'}"></p-column>
+                        <p-column field="medOnGoingPaymentDtStr" header="ONGOING PAY CRT DATE" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px','text-align': 'center'}"></p-column>
+                        <p-column field="documentType" header="DOCUMENT TYPE" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px','text-align': 'center'}"></p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showResult'>
+                <div class="col-12 error-input">
+                    <span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<sd-nopdf #noPdfModal [pdfacn]="pdfacn" [title]="'ACN PDF Document'"></sd-nopdf>

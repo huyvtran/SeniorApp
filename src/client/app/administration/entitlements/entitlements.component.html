@@ -1,0 +1,140 @@
+<div class="container-fluid no-gutters tab-content">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group">
+        <h2 (click)="toggleSearchAccordance()">
+            Manage Users
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+            </a>
+        </h2>
+        <div class="row block-group-invert" [hidden]='showForm'>
+            <div class="col-md enrollment-tab-container">
+                <form [formGroup]="manageUserForm" name="manage-user-form" novalidate>
+                    <div class="col-md-8 offset-md-2">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                <label for="user_id"><h3 class="pass-icon">USER ID</h3></label>
+                                <input type="name" required name="user_id" formControlName="userIdInput" class="form-control" [(ngModel)]="user_id" placeholder="Enter User ID" #userIdInput autofocus
+                                />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!user_id" class="clear-close" (click)="user_id=''" />
+                                <div *ngIf="errorMessage !== null" class="fontFamily form-control-feedback" style="min-width:78%;min-height:16px">
+                                    <span style="font-weight:bold;padding-right:1px;">X</span> {{ errorMessage }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row entitle-search-btn">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit" name="search" (click)="searchUser();"></button>
+                                    <button class="clear-button" type="button" name="clear" (click)="resetResult();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4">
+            <h2 (click)="toggleSearchAccordance()">
+                User Entitlements
+                <a class="accordion-icon">
+                    <span  [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+                </a>
+            </h2>
+            <div style="width:100%;height:auto;" class="admin-tab" *ngIf="user_id.length !== 0">
+
+                <div class="row user-result-list" *ngIf="noSearchResult.length != 0" [hidden]='!showForm'>
+                    <div class="col-12 error-input">
+                        <span class="error-message">
+                            <i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }}
+                        </span>
+                    </div>
+                </div>
+                <div class="row user-result-list enrollment-tab-container" [hidden]='!showForm' *ngIf="noSearchResult.length == 0">
+                    <div class="col-12 success" *ngIf="userNoteFoundMsg.length != 0"><b>{{ userNoteFoundMsg }}</b></div>
+                    <div class="col-md fntbld entitlement-result enrollment-tab-inner-container">
+                        <p-tabView orientation="left" class="enrollment-tab">
+                            <p-tabPanel header="Entitlements" class="enrollment-inner-tab">
+                                <div class="row" style="padding-top:20px;">
+                                    <form [formGroup]="entitlementForm" name="entitlementForm" class="form-inline" (submit)="updateEntitlements()"
+                                        role="form" novalidate>
+										<div class="col-md-11 offset-md-1">
+
+                                            <div class="row form-item">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+														<label for="roleList"><h3 class="pass-icon">ROLE</h3></label>
+														<p-dropdown [options]="roleList" class="form-control entitlmnt" formControlName="roleList" [(ngModel)]="selectedRole" placeholder="Select Role"></p-dropdown>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <label for="request_ticket_id"><h3>REQUEST ID TICKET</h3></label>
+                                                        <input type="name" formControlName="request_ticket_id" class="form-control" [(ngModel)]="request_ticket_id" placeholder="Enter ID TICKET"
+                                                            autofocus />
+                                                </div>
+                                            </div>
+                                            <div class="row form-item" style="padding-top: 20px;">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <label for="entitlement"><h3 class="pass-icon">ENTITLEMENTS</h3></label>
+                                                        <div _ngcontent-c8="" class="row col-md-12 entitle-checkbox" style="height: 16px !important;">
+                                                            <div *ngIf="noEntitlementSelected == true" class="fontFamily form-control-feedback" style="min-width:78%;min-height:16px">
+                                                                <span _ngcontent-c8="" style="font-weight:bold;padding-right:1px;">X</span> Please select at least one Entitlement
+                                                            </div>
+                                                        </div>
+                                                        <div class="row col-md-12 entitle-checkbox" *ngFor="let entitlementOpt of entitlementForm.controls['entitlement'].controls; let i=index">
+                                                            <input type="checkbox" name="{{ entitlementList[i].name }}" [formControl]="entitlementOpt" /> 
+                                                            <span>{{ entitlementList[i].label }}</span>
+                                                        </div>
+                                                        <div class="row col-md-12 entitle-checkbox" style="padding-left:50px;" *ngFor="let entitlementOpt of entitlementForm.controls['administrationEntitlement'].controls; let i=index">
+                                                            <input type="checkbox" name="{{ administrationEntitlementList[i].name }}" [formControl]="entitlementOpt" /> 
+                                                            <span>{{ administrationEntitlementList[i].label }}</span>
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                        <label for="comment"><h3>COMMENTS</h3></label>
+                                                        <input type="name" formControlName="comment" class="form-control" [(ngModel)]="comment" placeholder="Enter Comments" autofocus />
+												</div>
+											</div>
+											<div class="row form-item">
+												<div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+													<div class="text-center">
+														<button class="save-button" type="submit" name="update"></button>
+													</div>
+												</div>
+											</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </p-tabPanel>
+                            <p-tabPanel header="Audit">
+                                <div class="row audit-data" *ngIf="!auditData">
+                                    <p-dataTable #dt [value]="auditList" [paginator]="false" scrollable="true" scrollWidth="auto" class="tablebrd">
+                                        <p-column field="userId" header="USER ID" [sortable]="true" [style]="{'min-width':'100px', 'max-width':'100px','text-align': 'center'}"></p-column>
+                                        <p-column field="changeDescription" header="CHANGE DESCRIPTION" [sortable]="true" [style]="{'min-width':'188px','max-width':'188px', 'text-align': 'center'}"></p-column>
+                                        <p-column field="ticketNo" header="TICKET #" [sortable]="true" [style]="{'min-width':'100px', 'max-width':'100px','text-align': 'center'}"></p-column>
+                                        <p-column field="comment" header="COMMENT" [sortable]="true" [style]="{'min-width':'115px', 'max-width':'115px','text-align': 'center'}"></p-column>
+                                        <p-column field="createdBy" header="UPDATED BY" [sortable]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                                        <p-column field="createdTimeStamp" header="UPDATED DT" [sortable]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}">
+                                            <ng-template let-col let-submittedDate="rowData" pTemplate="body">
+                                                {{ submittedDate[col.field] | date:'MM/dd/yyyy' }}
+                                            </ng-template>
+                                        </p-column>
+                                    </p-dataTable>
+                                </div>
+                                <div class="row" *ngIf="auditData">
+                                    <div class="row user-result-list" *ngIf="noSearchResult.length != 0" [hidden]='!showForm'>
+                                        <div class="col-12 error-input">
+                                            <span class="error-message">
+                                                <i class="fa fa-exclamation-triangle"></i> No audit logs for this user
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-tabPanel>
+                        </p-tabView>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

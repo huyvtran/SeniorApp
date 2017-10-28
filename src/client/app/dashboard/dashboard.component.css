@@ -1,0 +1,106 @@
+.dashboard-link-nav .row {
+  margin-bottom: 20px;
+}
+.dashboard-link-nav .row .col-md-5 {
+  text-align: center;
+  border-radius: 5px;
+  line-height: 200px;
+  background-color: #d04528;
+  font-size: 20px;
+  color: #ffffff;
+  vertical-align: center;
+}
+
+.dashWrap {
+    width: 857px;
+    margin: auto;
+    margin-top:6%;
+}
+@media (min-width: 480px) and (max-width: 780px ){
+  .dashWrap {
+    width: 600px;
+  }
+}
+@media (min-height: 320px) and (max-height: 550px ){
+  .dashWrap {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 412px) and (max-height: 732px ){
+  .dashWrap {
+    width: 350px;
+  }
+}
+.dashboard h3{
+  margin-bottom:40px;
+}
+.dashboard-stat {
+    display: block;
+    margin-bottom: 22px;
+    overflow: hidden;
+}
+.dashboard-stat:after,
+.dashboard-stat:before {
+    content: " ";
+    display: table
+}
+.dashboard-stat .visual {
+    width: 80px;
+    height: 153px;
+    display: block;
+    float: left;
+    padding-top: 23px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    font-size: 35px;
+    line-height: 35px;
+}
+.dashboard-stat .details {
+    position: absolute;
+    right: 15px;
+    padding-right: 15px;
+}
+.dashboard-stat .details .number {
+    padding-top: 45px;
+    text-align: right;
+    font-size: 52px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+.dashboard-stat .details .desc {
+    text-align: right;
+    font-size: 28px;
+    letter-spacing: 0;
+    font-weight: 300;
+}
+.dashboard-stat .visual>i {
+    margin-left: -15px;
+    font-size: 110px;
+    line-height: 110px
+}
+.dashboard-stat.grey {
+    background-color: #ebebeb;
+    height:190px;
+    border-radius:0px;
+}
+.dashboard-stat.grey .visual>i {
+    color: #FE5E3C;
+}
+.dashboard-stat.grey .details .number {
+    color: #333
+}
+.dashboard-stat.grey .details .desc {
+    color: #FE5E3C;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.dashboard-stat.grey .more {
+    color: #333;
+    background-color: #dbdbdb
+}
+
+.dashboard-stat .security .desc, .dashboard-stat .reports .desc {
+  margin-top: 55%; margin-right: 40px;
+}

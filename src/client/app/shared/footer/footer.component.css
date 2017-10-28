@@ -1,0 +1,11 @@
+.sos-ui-footer {
+    z-index: 0px;
+}
+.footer-text-wrapper a {
+    color: #ffffff;
+    text-decoration: none;	
+}
+.footer-text-wrapper a:hover {
+    color: #cccccc;
+    text-decoration: underline;
+}

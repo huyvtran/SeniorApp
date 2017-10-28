@@ -1,0 +1,116 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showForm = !showForm">
+            By Product Type
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+                </a>
+        </h2>
+        <div class="byproductpopover"><i class="fa fa-info-circle" [popover]="popTemplate" tabindex="1" placement="bottom" triggers="focus"></i>
+            <ng-template #popTemplate>
+                <div class="bypopover">This report provides a summary of applications submitted by Plan Type.</div>
+            </ng-template>
+        </div>
+        <div class="block-group-invert" [hidden]='showForm'>
+            <div class="content no-gutters mx-auto formHolder">
+                <form [formGroup]="byProductForm" name="byProductForm" novalidate class="form-inline" (submit)="searchReport()">
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="fromDate" class="calendarFieldLabel"><h3 class="pass-icon">FROM</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="fromDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="byProductForm.controls.fromDate" [htmlElem]="fromDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="toDate" class="calendarFieldLabel"><h3 class="pass-icon">TO</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="byProductForm.controls.toDate" [htmlElem]="toDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="brand"><h3>BRAND</h3></label>
+                            <p-multiSelect [options]="brandList" formControlName="brands" [(ngModel)]="selectedBrand" [style]="{'width':'100%'}" styleClass="width100"
+                                defaultLabel="Multi Select Brand"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="state"><h3>STATE</h3></label>
+                            <p-multiSelect [options]="stateList" formControlName="states" [(ngModel)]="selectedState" [style]="{'width':'100%'}" styleClass="width100"
+                                defaultLabel="Multi Select State"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="productType"><h3>PRODUCT TYPES</h3></label>
+                            <p-multiSelect [options]="productTypeList" (onChange)="setProductTypes($event)" formControlName="productTypes" [(ngModel)]="selectedProductType" [style]="{'width':'100%'}"
+                                styleClass="width100" defaultLabel="Multi Select Product Type"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="row no-gutters actionControlsContainer">
+                        <div class="form-group text-center mx-auto">
+                            <button class="search-button" type="submit"></button>
+                            <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetByProductForm();"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportByProductTypeSearchList }">
+        <h2 (click)="showForm = !showForm">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list" [hidden]='!showForm' *ngIf=" reportByProductTypeSearchList && reportByProductTypeSearchList.length > 0">
+                <div class="col-12">
+                    <div class="result-set-info-top"></div>
+                    <span class="help-popup">
+                        <a (click)="helpByProductTypeModal.show()" class="table-hidden-content"><img src="./assets/images/info-icon.png" title="Help" /></a>
+                            <sd-byproducttype-help #helpByProductTypeModal [title]="'Help'"></sd-byproducttype-help> 
+                        <a><img src="./assets/images/download-icon_27.png" (click)="saveDownloadData()" alt="download" title="Download" /></a> 
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top advanced-result noresultfnd1">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>DATE</th>
+                                    <th *ngIf="selectedProductType.indexOf('MA')>-1 || selectedProductType.length == 0" class="txtAlignC">MA</th>
+                                    <th *ngIf="selectedProductType.indexOf('MAPD')>-1 || selectedProductType.length == 0" class="txtAlignC">MAPD</th>
+                                    <th *ngIf="selectedProductType.indexOf('MED SUPP')>-1 || selectedProductType.length == 0" class="txtAlignC">MED SUPP</th>
+                                    <th *ngIf="selectedProductType.indexOf('PDP')>-1 || selectedProductType.length == 0" class="txtAlignC">PDP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let byProductTypeRow of reportByProductTypeSearchList">
+                                    <td>{{ byProductTypeRow.planTypeDate }}</td>
+                                    <td *ngIf="selectedProductType.indexOf('MA')>-1 || selectedProductType.length == 0" class="txtAlignC">{{ byProductTypeRow.maCount }}</td>
+                                    <td *ngIf="selectedProductType.indexOf('MAPD')>-1 || selectedProductType.length == 0" class="txtAlignC">{{ byProductTypeRow.mapdCount }}</td>
+                                    <td *ngIf="selectedProductType.indexOf('MED SUPP')>-1 || selectedProductType.length == 0" class="txtAlignC">{{ byProductTypeRow.medsuppCount }}</td>
+                                    <td *ngIf="selectedProductType.indexOf('PDP')>-1 || selectedProductType.length == 0" class="txtAlignC">{{ byProductTypeRow.pdpCount }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showResult'>
+                <div class="col-12 error-input"><span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }} </span></div>
+            </div>
+        </div>
+    </div>
+</div>

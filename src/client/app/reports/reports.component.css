@@ -1,0 +1,111 @@
+.reports-content{
+    height: 100%;
+    /*background-color: red;*/
+    padding-top: 35px;
+    /* min-height: calc(100vh - 120px); */
+    width: 100%;
+}
+.reports-tab-container{
+    /* min-height: calc(100vh - 215px);  */
+    width:100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0%;
+    padding-bottom: 1%;
+}
+.page-header h1{
+    font-weight: 400;
+    font-size: 24px;
+    color: #2f2f2f;
+    padding-bottom: 20px;
+}
+.reports-tab-content{
+    height:auto;
+    /* min-height: calc(80vh - 246px); */
+}
+.tab {
+    overflow: hidden;
+    padding-top: 0px;
+    padding-bottom: 14px;
+}
+.tab span{
+    width: 33.3%;
+    min-width: 80px;
+    padding:0px;
+}
+button{
+    width:100%;
+    height:100%;
+    margin:0px;
+    height: 15vh;
+    min-height: 80px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    border-bottom: 15px solid #092D4F;
+    background-color: #E7E7E7;
+    color: #2f2f2f;
+    font-size: 1.09rem;
+    font-weight: 400;
+    
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #092D4F;
+    color:#fff;
+    
+}
+
+/* Create an active/current tablink class */
+.tab .tab-menu-bottom-arrow button.active {
+    background-color: #092D4F;
+    color:#fff;
+}
+.tab span {
+    float:left;
+    border-right: 1px solid #fff;
+}
+
+.tab-menu-bottom-arrow {
+	position: relative;
+}
+.tab-menu-bottom-arrow:after{
+    content: url('./assets/images/tab-downarrow.png');
+    position: absolute;
+    top: 97%;
+    left: 48%;
+    width: 30px;
+    height: 30px;
+}
+
+@media (max-height: 495px) {
+  .tab-menu-bottom-arrow:after {
+    top: 95%;
+    left: 46%;
+  }
+  .tab{
+      padding-bottom:19px;
+  }
+}
+
+@media (min-height: 496px) and (max-height: 600px ){
+  .tab-menu-bottom-arrow:after {
+    top: 96%;
+    left: 46%;
+  }
+  .tab{
+      padding-bottom:17px;
+  }
+}
+.primNgcalendarField .form-control-feedback {
+    position: initial;
+  }

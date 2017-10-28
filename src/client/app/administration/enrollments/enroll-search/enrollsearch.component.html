@@ -1,0 +1,169 @@
+<div class="col-md enrollment-tab-inner-container">
+    <p-tabView orientation="left" (onChange)="resetResult($event);resetAllFormBuilders();" [activeIndex]="activeTabIndex">
+        <p-tabPanel header="Name" [style]="{'color':'#000'}">
+            <div class="row">
+                <form [formGroup]="enrollSearchByNameForm" role="form" (submit)="searchReportByName()" novalidate>
+                    <div class="col-md-11 offset-md-1">
+                        <div class="content-fluid w-100" *ngIf="userNameError">
+                            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ userNameError }}</span>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                <label for="firstName"><h3 class="pass-icon">FIRST NAME</h3></label>
+                                <input type="text" OnlyAlphabet=true class="form-control" autofocus [(ngModel)]="userNameObj.firstName" placeholder="Enter First Name"
+                                    formControlName="firstName" #firstNameInput OnlyAlphabet=true />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.firstName" class="clear-close" (click)="userNameObj.firstName=''"
+                                />
+                                <enrollments-error-messages [control]="enrollSearchByNameForm.controls.firstName" [htmlElem]="firstNameInput">
+                                </enrollments-error-messages>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                <label for="lastName"><h3 class="pass-icon">LAST NAME</h3></label>
+                                <input type="text" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.lastName" placeholder="Enter Last Name"
+                                    formControlName="lastName" #lastNameInput OnlyAlphabet=true />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.lastName" class="clear-close" (click)="userNameObj.lastName=''"
+                                />
+                                <enrollments-error-messages [control]="enrollSearchByNameForm.controls.lastName" [htmlElem]="lastNameInput">
+                                </enrollments-error-messages>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit"></button>
+                                    <button class="clear-button" type="reset" name="clear" (click)="resetResult($event);resetEnrollSearchByNameForm();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="ACN">
+            <div class="row">
+                <form [formGroup]="enrollSearchByACNForm" role="form" (submit)="searchReportByACN()" novalidate>
+                    <div class="col-md-11 offset-md-1">
+                        <div class="content-fluid w-100" *ngIf="userACNError">
+                            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ userACNError }}</span>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                <label for="acn"><h3 class="pass-icon">ACN</h3></label>
+                                <textarea type="name" name="acn" class="form-control" [(ngModel)]="userACN" placeholder="Enter ACN" formControlName="acn" #acnInput
+                                    autofocus></textarea>
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!userACN" class="clear-close" (click)="userACN=''" />
+                                <enrollments-error-messages [control]="enrollSearchByACNForm.controls.acn" [htmlElem]="acnInput">
+                                </enrollments-error-messages>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit"></button>
+                                    <button class="clear-button" type="reset" name="clear" (click)="resetResult($event);resetEnrollSearchByACNForm();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Confirmation No">
+            <div class="row">
+                <form [formGroup]="enrollSearchByConfirmationNoForm" role="form" (submit)="searchReportByConfirmationNo()" novalidate>
+                    <div class="col-md-11 offset-md-1">
+                        <div class="content-fluid w-100" *ngIf="confirmationError">
+                            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ confirmationError }}</span>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                <label for="confirmationNo"><h3 class="pass-icon">CONFIRMATION NO</h3></label>
+                                <input type="text" class="form-control" autofocus [(ngModel)]="confirmationNo" placeholder="Enter Confirmation No"
+                                    formControlName="confirmationNo" #confirmationNoInput />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!confirmationNo" class="clear-close" (click)="confirmationNo=''"
+                                />
+                                <enrollments-error-messages [control]="enrollSearchByConfirmationNoForm.controls.confirmationNo" [htmlElem]="confirmationNoInput">
+                                </enrollments-error-messages>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit"></button>
+                                    <button class="clear-button" type="reset" name="clear" (click)="resetResult($event);resetEnrollSearchByConfirmationNoForm();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Tracking ID">
+            <div class="row">
+                <form [formGroup]="enrollSearchByTrackingIdForm" role="form" (submit)="searchReportByTrackingId()" novalidate>
+                    <div class="col-md-11 offset-md-1">
+                        <div class="content-fluid w-100" *ngIf="trackingIdError">
+                            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ trackingIdError }}</span>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                <label for="trackingNo"><h3 class="pass-icon">TRACKING ID</h3></label>
+                                <input type="text" class="form-control" autofocus [(ngModel)]="trackingId" formControlName="trackingNo" #trackingNoInput
+                                    placeholder="Enter Tracking ID" />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!trackingId" class="clear-close" (click)="trackingId=''" />
+                                <enrollments-error-messages [control]="enrollSearchByTrackingIdForm.controls.trackingNo" [htmlElem]="trackingNoInput">
+                                </enrollments-error-messages>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit"></button>
+                                    <button class="clear-button" type="reset" name="clear" (click)="resetResult($event);resetEnrollSearchByTrackingIdForm();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="HICN">
+            <div class="row">
+                <form [formGroup]="enrollSearchByHICNForm" role="form" (submit)="searchReportByHICN()" novalidate>
+                    <div class="col-md-11 offset-md-1">
+                        <div class="content-fluid w-100" *ngIf="hicnError">
+                            <div class="w-100 col-lg-12 col-md-12 col-sm-12-col-xs-12 error-input">
+                                <span class="w-100 error-message"><i class="fa fa-exclamation-triangle"></i> {{ hicnError }}</span>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                <label for="hicn"><h3 class="pass-icon">HICN</h3></label>
+                                <input type="text" class="form-control" [(ngModel)]="hicn" formControlName="hicn" #hicnInput placeholder="Enter HICN" />
+                                <img src="./assets/images/clear-close-icon.png" [hidden]="!hicn" class="clear-close" (click)="hicn=''" />
+                                <enrollments-error-messages [control]="enrollSearchByHICNForm.controls.hicn" [htmlElem]="hicnInput">
+                                </enrollments-error-messages>
+                            </div>
+                        </div>
+                        <div class="row form-item">
+                            <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                <div class="form-group text-center">
+                                    <button class="search-button" type="submit"></button>
+                                    <button class="clear-button" type="reset" name="clear" (click)="resetResult($event);resetEnrollSearchByHICNForm();"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </p-tabPanel>
+    </p-tabView>
+</div>

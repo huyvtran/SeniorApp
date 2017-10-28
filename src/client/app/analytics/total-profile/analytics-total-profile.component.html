@@ -1,0 +1,133 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showForm = !showForm">
+            Total Profile
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showForm, 'collapse-icon': !showForm }"></span>
+                </a>
+        </h2>
+        <div class="block-group-invert" [hidden]='showForm'>
+            <div class="content no-gutters mx-auto formHolder">
+                <form [formGroup]="totalProfileForm" name="totalProfileForm" novalidate class="form-inline" (submit)="searchReport()">
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="fromDate" class="calendarFieldLabel"><h3 class="pass-icon">FROM</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="fromDate" #fromDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxFromDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="fromDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="totalProfileForm.controls.fromDate" [htmlElem]="fromDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="toDate" class="calendarFieldLabel"><h3 class="pass-icon">TO</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="toDate" #toDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="toDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="totalProfileForm.controls.toDate" [htmlElem]="toDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="brand"><h3>BRAND</h3></label>
+                            <p-multiSelect [options]="brandList" name="brands" formControlName="brands" [(ngModel)]="selectedBrand" [style]="{'width':'100%'}" styleClass="width100"
+                                defaultLabel="Multi Select Brand"></p-multiSelect>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="fromDate" class="calendarFieldLabel"><h3>FROM DOB</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="fromDOBDate" #fromDOBDateInput dateFormat="mm/dd/yy" showIcon="true"
+                                [maxDate]="maxFromDate" icon="fa-calendar" inputStyle="" [(ngModel)]="fromDOBDate" inputStyleClass="form-control"
+                                [inline]="false" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="totalProfileForm.controls.fromDOBDate" [htmlElem]="fromDOBDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top primNgcalendarField">
+                            <label for="toDate" class="calendarFieldLabel"><h3>TO DOB</h3></label>
+                            <p-calendar placeholder="mm/dd/yyyy" formControlName="toDOBDate" #toDOBDateInput dateFormat="mm/dd/yy" showIcon="true" [maxDate]="maxToDate"
+                                icon="fa-calendar" inputStyle="" [(ngModel)]="toDOBDate" inputStyleClass="form-control" [inline]="false"
+                                [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017"></p-calendar>
+                            <analytics-calendar-error-messages [control]="totalProfileForm.controls.toDOBDate" [htmlElem]="toDOBDateInput">
+                            </analytics-calendar-error-messages>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-9">
+                        <div class="form-group sd-padding-top">
+                            <label for="gender"><h3>GENDER</h3></label>
+                            <p-dropdown [options]="genderList" name="gender" formControlName="gender" [(ngModel)]="selectedGender" [style]="{'width':'100%'}" styleClass="width100" [(ngModel)]="selectedGender"
+                                placeholder="Select Gender"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row no-gutters actionControlsContainer">
+                        <div class="form-group text-center mx-auto">
+                            <button class="search-button" type="submit"></button>
+                            <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetTotalProfileForm();"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportTotalProfileSearchList }">
+        <h2 (click)="showForm = !showForm">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showForm, 'collapse-icon': showForm }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list" [hidden]='!showForm' *ngIf=" reportTotalProfileSearchList && reportTotalProfileSearchList.length > 0">
+                <div class="col-12">
+                    <div class="result-set-info-top"></div>
+                    <span class="help-popup">
+                        <a><img src="./assets/images/download-icon_27.png" (click)="saveDownloadData()" alt="download" title="Download" /></a> 
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top advanced-result noresultfnd1">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>USER NAME</th>
+                                    <th>GENDER</th>
+                                    <th>DOB</th>
+                                    <th>BRAND</th>
+                                    <th>PLAN TYPE</th>
+                                    <th>OVERALL BENEFIT <br />PREFERENCES</th>
+                                    <th class="txtAlignC">ZIPCODE</th>
+                                    <th>STATE</th>
+                                    <th>COUNTY</th>
+                                    <th>ENROLLMENT <br />WITHIN 90 DAYS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let totalprofileRow of reportTotalProfileSearchList">
+                                    <td>{{ totalprofileRow.userName }}</td>
+                                    <td>{{ totalprofileRow.gender }}</td>
+                                    <td>{{ totalprofileRow.dob | date:'MM/dd/yyyy' }}</td>
+                                    <td>{{ totalprofileRow.brand }}</td>
+                                    <td>{{ totalprofileRow.planType }}</td>
+                                    <td>{{ totalprofileRow.overallBenifitPreferences }}</td>
+                                    <td class="txtAlignC">{{ totalprofileRow.zipcode }}</td>
+                                    <td>{{ totalprofileRow.state }}</td>
+                                    <td>{{ totalprofileRow.county }}</td>
+                                    <td>{{ totalprofileRow.enrollmentWithin90Days }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div class="result-set-info">1-10 of 85 Results.</div> -->
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showResult'>
+                <div class="col-12 error-input"><span class="error-message"><i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }} </span></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div bsModal #viewDetailsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-3 mr-3">
+                <!-- <ng-content select=".modal-body"> </ng-content> -->
+                <div *ngIf="!resetScreen && userName.length != 0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>User Name:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h2><b>{{ userName }}</b></h2>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>First Name:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>{{ detailsData.firstName }}</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>DOB:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>{{ detailsData.dob }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>Last Name:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>{{ detailsData.lastName }}</h3>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Gender:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>{{ detailsData.gender }}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2>Email:</h2>
+                        </div>
+                        <div class="col-md-3">
+                            <h3>{{ detailsData.email }}</h3>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <div class="row" *ngIf="detailsData.userRole == 'MEMBER'">
+                        <div class="col-md-12 member-text">
+                            This user is a Member. To reset password for existing members, please log in to <a href="https://www.anthem.com/"
+                                target="_blank">https://www.anthem.com/</a>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="resetScreen && userName.length != 0" class="mb-4 mt-4">
+                    <div class="confirm-box" *ngIf="tempPassword.length == 0 && tempPasswordError.length == 0">
+                        Are you sure you want to reset the password for <b>{{ userName }}</b>
+                    </div>
+                    <div class="result-box" *ngIf="tempPassword">
+                        <p>Please note the temporary password for the user <b>{{ userName }}</b></p>
+                        <p class="temp-password">Temporary Password : <b>{{ tempPassword }}</b></p>
+                    </div>
+                    <div *ngIf="tempPasswordError">
+                        {{ tempPasswordError }}
+                    </div>
+                </div>
+                <div *ngIf="userNameError">
+                    {{ userNameError }}
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div *ngIf="!resetScreen && userName.length != 0 && (userNameError.length === 0)" class="footer-button-grp">
+                    <div class="footer-button-grp" *ngIf="tempPassword.length === 0">
+                        <button class="btn btn-primary primary-button" [ngClass]="{'button-disabled':detailsData.userRole === 'MEMBER'}" (click)="openResetConfirmation()"> <h2>Reset Password</h2> </button>
+                        <button class="btn btn-default secondary-button" (click)="hide()"> <h2>Cancel</h2> </button>
+                    </div>
+                </div>
+                <div *ngIf="resetScreen && userName.length != 0" class="footer-button-grp">
+                    <div class="footer-button-grp" *ngIf="tempPassword.length === 0">
+                        <button class="btn btn-primary primary-button" (click)="resetPassword()"> Yes </button>
+                        <button class="btn btn-default secondary-button" (click)="hide()"> No </button>
+                    </div>
+                    <div class="footer-button-grp" *ngIf="tempPassword.length !== 0">
+                        <button class="btn btn-primary primary-button" (click)="saveAndOk()"> Ok </button>
+                    </div>
+                </div>
+                <div *ngIf="userNameError" class="footer-button-grp">
+                    <div class="footer-button-grp">
+                        <button class="btn btn-primary primary-button" (click)="hide()"> Close </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

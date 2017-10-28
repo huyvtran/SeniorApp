@@ -1,0 +1,47 @@
+<div class="row no-gutters site-content">
+    <div class="container no-gutters mx-auto my-auto">
+        <div class="container-fluid no-gutters page-header">
+            <h1>Administration
+                <span (click) = "backToEnrollmentSearchPages()" class="aLink"  *ngIf="isEnrollDetails">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i><span>BACK</span>
+                </span>
+            </h1>
+        </div>
+        <div class="container-fluid no-gutters tab-wrapper administration-submenu details" *ngIf="isEnrollDetails">
+            <div class="tab">
+                <span [class.tab-menu-bottom-arrow]="tabs.detailsTabOvered" (mouseout)="toggleTabHighlight('detailsTabOvered',false)" (mouseover)="toggleTabHighlight('searchTabOvered',true)">
+                    <button [routerLink]="['details', acn]"  type="button" class="active" (click)="triggerTabSelection('detailsTabOvered')" >DETAILS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.paymentsTabOvered" (mouseout)="toggleTabHighlight('paymentsTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('paymentsTabOvered',true)">
+                    <button [routerLink]="['payments', acn]" type="button" class="active" (click)="triggerTabSelection('paymentsTabOvered')">PAYMENTS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.documentsTabOvered" (mouseout)="toggleTabHighlight('documentsTabOvered',false)" (mouseover)="toggleTabHighlight('documentsTabOvered',true)">
+                    <button [routerLink]="['documents', acn]"  type="button" class="active" (click)="triggerTabSelection('documentsTabOvered')" >DOCUMENTS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.dataTabOvered" (mouseout)="toggleTabHighlight('dataTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('dataTabOvered',true)">
+                    <button [routerLink]="['data', acn]" type="button" class="active" (click)="triggerTabSelection('dataTabOvered')">DATA</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.routedTabOvered" (mouseout)="toggleTabHighlight('routedTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('routedTabOvered',true)">
+                    <button [routerLink]="['routed', acn]" type="button" class="active" (click)="triggerTabSelection('routedTabOvered')">ROUTED</button>
+                </span>                
+            </div>
+        </div>
+        <div class="container-fluid no-gutters tab-wrapper administration-submenu" *ngIf="!isEnrollDetails">
+            <div class="tab">
+                <span [class.tab-menu-bottom-arrow]="tabs.searchTabOvered" (mouseout)="toggleTabHighlight('searchTabOvered',false)" (mouseover)="toggleTabHighlight('searchTabOvered',true)">
+                    <button [routerLink]="['enrollment']"  type="button" class="active" (click)="triggerTabSelection('searchTabOvered')" >ENROLLMENTS</button>
+                </span>
+                <span [class.tab-menu-bottom-arrow]="tabs.advsearchTabOvered" (mouseout)="toggleTabHighlight('advsearchTabOvered',false)"
+                    (mouseover)="toggleTabHighlight('advsearchTabOvered',true)">
+                    <button [routerLink]="['entitlement']" type="button" class="active" (click)="triggerTabSelection('advsearchTabOvered')">ENTITLEMENTS</button>
+                </span>
+            </div>
+        </div>
+        <div class="container-fluid no-gutters tab-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

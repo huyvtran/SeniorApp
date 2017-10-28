@@ -1,0 +1,19 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 block-group search-criteria-block">
+        <h2>
+            Routed - ACN : {{ acn }}
+        </h2>
+        <div class="container-fluid no-gutters block-group-invert pt-2 pb-2">
+            <div class="loading-container" *ngIf="xmlEnabled; else elseBlock">
+                <pre class="xml-container" lang="xml">{{ message }}</pre>
+            </div>
+            <ng-template #elseBlock>
+                <div class="loading-container my-5 text-center">
+                    <span class="error-message">
+                        <i class="fa fa-exclamation-triangle"></i>{{ message }}
+                    </span>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

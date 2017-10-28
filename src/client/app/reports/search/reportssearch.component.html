@@ -1,0 +1,347 @@
+<div class="container-fluid no-gutters">
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group search-criteria-block">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            Search
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': showSearchCriteria, 'collapse-icon': !showSearchCriteria }"></span>
+            </a>
+        </h2>
+        <div class="container-fluid no-gutters block-group-invert search-criteria" [hidden]='showSearchCriteria'>
+            <h4>Search using any of the below criteria</h4>
+            <div class="col-md fntbld">
+                <p-tabView orientation="left" (onChange)="resetResult();resetAllFormBuilders();">
+                    <p-tabPanel header="Name" [style]="{'font-weight':'bold'}">
+                        <div class="row">
+                            <form [formGroup]="reportSearchByNameForm" role="form" (submit)="searchReportByName()" novalidate>
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                            <label for="firstName">
+                                                <h3 class="pass-icon">FIRST NAME</h3>
+                                            </label>
+                                            <input type="name" name="firstName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.firstName" placeholder="Enter First Name"
+                                                formControlName="firstName" #firstNameInput autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.firstName" class="clear-close" (click)="userNameObj.firstName=''"
+                                            />
+                                            <reports-error-messages [control]="reportSearchByNameForm.controls.firstName" [htmlElem]="firstNameInput">
+
+                                            </reports-error-messages>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6-col-xs-6">
+                                            <label for="lastName">
+                                                <h3 class="pass-icon">LAST NAME</h3>
+                                            </label>
+                                            <input type="name" name="lastName" OnlyAlphabet=true class="form-control" [(ngModel)]="userNameObj.lastName" placeholder="Enter Last Name"
+                                                formControlName="lastName" #lastNameInput />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userNameObj.lastName" class="clear-close" (click)="userNameObj.lastName=''"
+                                            />
+                                            <reports-error-messages [control]="reportSearchByNameForm.controls.lastName" [htmlElem]="lastNameInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByNameForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="ACN">
+                        <div class="row">
+                            <form [formGroup]="reportSearchByACNForm" role="form" (submit)="searchReportByACN()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="acn">
+                                                <h3 class="pass-icon">ACN</h3>
+                                            </label>
+                                            <textarea type="name" name="acn" class="form-control" [(ngModel)]="userACN" placeholder="Enter ACN" formControlName="acn"
+                                                #acnInput autofocus></textarea>
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!userACN" class="clear-close" (click)="userACN=''" />
+                                            <reports-error-messages [control]="reportSearchByACNForm.controls.acn" [htmlElem]="acnInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByACNForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Confirmation No">
+                        <div class="row">
+                            <form [formGroup]="reportSearchByConfirmationNoForm" role="form" (submit)="searchReportByConfirmationNo()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="confirmationNo">
+                                                <h3 class="pass-icon">CONFIRMATION NO</h3>
+                                            </label>
+                                            <input type="name" name="confirmationNo" class="form-control" [(ngModel)]="confirmationNo" placeholder="Enter Confirmation No"
+                                                formControlName="confirmationNo" #confirmationNoInput autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!confirmationNo" class="clear-close" (click)="confirmationNo=''"
+                                            />
+                                            <reports-error-messages [control]="reportSearchByConfirmationNoForm.controls.confirmationNo" [htmlElem]="confirmationNoInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByConfirmationNoForm();">
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Tracking ID">
+                        <div class="row">
+                            <form [formGroup]="reportSearchByTrackingIdForm" (submit)="searchReportByTrackingId()" role="form" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="trackingNo">
+                                                <h3 class="pass-icon">TRACKING ID</h3>
+                                            </label>
+                                            <input type="name" name="trackingNo" class="form-control" [(ngModel)]="trackingId" placeholder="Enter Tracking ID" formControlName="trackingNo"
+                                                #trackingNoInput autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!trackingId" class="clear-close" (click)="trackingId=''" />
+                                            <reports-error-messages [control]="reportSearchByTrackingIdForm.controls.trackingNo" [htmlElem]="trackingNoInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByTrackingIdForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="HICN">
+                        <div class="row">
+                            <form [formGroup]="reportSearchByHICNForm" role="form" (submit)="searchReportByHICN()" novalidate>
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 single-field">
+                                            <label for="hicn">
+                                                <h3 class="pass-icon">HICN</h3>
+                                            </label>
+                                            <input type="name" name="hicn" class="form-control" [(ngModel)]="hicn" formControlName="hicn" placeholder="Enter HICN" #hicnInput
+                                                autofocus />
+                                            <img src="./assets/images/clear-close-icon.png" [hidden]="!hicn" class="clear-close" (click)="hicn=''" />
+                                            <reports-error-messages [control]="reportSearchByHICNForm.controls.hicn" [htmlElem]="hicnInput">
+                                            </reports-error-messages>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12">
+                                            <div class="form-group text-center">
+                                                <button class="search-button" type="submit"></button>
+                                                <button class="clear-button" type="reset" name="clear" (click)="resetResult();resetReportSearchByHICNForm();"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12-col-xs-12 block-group sd-margin-top mt-4 mb-4" [ngClass]="{ 'empty-result': !reportSearchList }">
+        <h2 (click)="showSearchCriteria=!showSearchCriteria">
+            Result {{ countMessage }}
+            <a class="accordion-icon">
+                <span [ngClass]="{'expand-icon': !showSearchCriteria, 'collapse-icon': showSearchCriteria }"></span>
+            </a>
+        </h2>
+        <div style="width:100%;height:auto;" class="report-tab">
+            <div class="row user-result-list report-tab" *ngIf="reportSearchList && reportSearchList.length > 0" [hidden]='!showSearchCriteria'>
+                <div class="col-12">
+                    <div class="result-set-info-top">{{ paginateMessage }}</div>
+                    <span class="help-popup">
+                        <a (click)="helpModal.show()" class="table-hidden-content">
+                            <img src="./assets/images/info-icon.png" title="Help" />
+                        </a>
+                        <sd-help #helpModal [title]="'Help'"></sd-help>
+                        <a (click)="downloadCurrentPage()">
+                            <img src="./assets/images/download-icon_27.png" alt="download" title="Download" />
+                        </a>
+                        <a (click)="dt.exportCSV()">
+                            <img src="./assets/images/downloadall_25.png" alt="download" title="Download All" />
+                        </a>
+                    </span>
+                </div>
+                <div class="col-12 user-result-list-inner ui-paginator-list-top search-result noresultfnd">
+                    <p-dataTable #dt [value]="reportSearchList" [rows]="10" [paginator]="true" [pageLinks]="3" (onPage)="paginationInfo($event)"
+                        (onFilter)="filterResult($event)" (onSort)="sortResult($event)" exportFilename="Reports" scrollable="true"
+                        scrollWidth="auto" class="tablebrd" [alwaysShowPaginator]="false">
+                        <p-column field="rowNumber" header="NO" [style]="{'min-width':'92px', 'white-space': 'normal', 'text-align': 'center'}"></p-column>
+                        <p-column header="PAYMENT HISTORY" [style]="{'min-width':'92px', 'white-space': 'normal', 'text-align': 'center'}">
+                            <ng-template let-paymentInfo="rowData" pTemplate="body">
+                                <a (click)="paymentHistoryModal.show()" class="table-hidden-content curpoint">
+                                    <img src="./assets/images/view-icon.png" />
+                                </a>
+                                <sd-payment-history #paymentHistoryModal [reportType]="'reportSearch'" [appRecordObj]="paymentInfo" [appRecordACN]="paymentInfo.acn"
+                                    [title]="'Payment History'"></sd-payment-history>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="acn" header="ACN" [sortable]="true" styleClass="font-weight-bold" [filter]="true" [style]="{'min-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-acnInfo="rowData" pTemplate="body">
+                                <a (click)="getPDFReport(acnInfo.acn)" class="table-hidden-content curpoint">{{ acnInfo.acn }}</a>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="confirmationNo" header="CONFIRMATION NO" [sortable]="true" [filter]="true" [style]="{'min-width':'178px', 'max-width':'178px', 'text-align': 'center'}"></p-column>
+                        <p-column field="electronicOptIn" header="OPT IN" [sortable]="true" [filter]="true" [style]="{'min-width':'95px', 'max-width':'95px', 'text-align': 'center'}"></p-column>
+                        <p-column field="applicationStatus" header="APP STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'128px', 'max-width':'128px', 'text-align': 'center'}"></p-column>
+                        <p-column field="appSubStatus" header="APP SUB STATUS" [sortable]="true" [filter]="true" [style]="{'min-width':'199px', 'max-width':'199px', 'text-align': 'center'}"></p-column>
+                        <p-column field="applicationVersion" header="VERSION" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px', 'text-align': 'center'}"></p-column>
+                        <p-column field="brand" header="BRAND" [sortable]="true" [filter]="true" [style]="{'min-width':'97px', 'max-width':'97px', 'text-align': 'center'}"></p-column>
+                        <p-column field="state" header="ST" [sortable]="true" [filter]="true" [style]="{'min-width':'70px', 'max-width':'70px','text-align': 'center'}"></p-column>
+                        <p-column field="firstName" header="FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'108px', 'max-width':'108px', 'text-align': 'center'}"></p-column>
+                        <p-column field="middleInitial" header="MI" [sortable]="true" [filter]="true" [style]="{'min-width':'97px', 'max-width':'97px', 'text-align': 'center'}"></p-column>
+                        <p-column field="lastName" header="LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'96px', 'max-width':'96px', 'text-align': 'center'}"></p-column>
+                        <p-column field="emailAddress" header="EMAIL" [sortable]="true" [filter]="true" [style]="{'min-width':'168px', 'max-width':'168px', 'text-align': 'center'}"></p-column>
+                        <p-column field="electronicOptIn" header="EMAIL OPT IN" [sortable]="true" [filter]="true" [style]="{'min-width':'138px', 'max-width':'138px','text-align': 'center'}"></p-column>
+                        <p-column field="welcomeKitOptIn" header="WELCOME KIT OPT IN" [sortable]="true" [filter]="true" [style]="{'min-width':'187px', 'max-width':'187px','text-align': 'center'}"></p-column>
+                        <p-column field="anocOptIn" header="ANOC OPT IN" [sortable]="true" [filter]="true" [style]="{'min-width':'138px', 'max-width':'138px','text-align': 'center'}"></p-column>
+                        <p-column field="campaignId" header="EVENT ID" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="hcid" header="HCID" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="tobaccoUsage" header="TOBACCO USAGE" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px','text-align': 'center'}"></p-column>
+                        <p-column field="newToMedicare" header="NEW TO MEDICARE" [sortable]="true" [filter]="true" [style]="{'min-width':'172px', 'max-width':'172px','text-align': 'center'}"></p-column>
+                        <p-column field="requestEffectiveDate" header="REQ EFF" [sortable]="true" [filter]="true" [style]="{'min-width':'130px','max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="futureReqEffDate" header="FUT REQ EFF" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="createPartnerID" header="CREATE PARTNER" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px','text-align': 'center'}"></p-column>
+                        <p-column field="submitPartnerID" header="SUBMIT PARTNER" [sortable]="true" [filter]="true" [style]="{'min-width':'162px', 'max-width':'162px', 'text-align': 'center'}"></p-column>
+                        <p-column field="parentProducerID" header="PARENT PRODUCER" [sortable]="true" [filter]="true" [style]="{'min-width':'176px', 'max-width':'176px', 'text-align': 'center'}"></p-column>
+                        <p-column field="apacCallID" header="APAC ID" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="appSource" header="APP SOURCE" [sortable]="true" [filter]="true" [style]="{'min-width':'131px', 'max-width':'131px','text-align': 'center'}"></p-column>
+                        <p-column field="appSourceValue" header="APP SOURCE VALUE" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px', 'text-align': 'center'}"></p-column>
+                        <p-column field="ebSource" header="EB SOURCE" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="ebReply" header="EB REPLY" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="statusReason" header="STATUS REASON" [sortable]="true" [filter]="true" [style]="{'min-width':'157px', 'max-width':'157px','text-align': 'center'}"></p-column>
+                        <p-column field="expirationDate" header="EXPIRATION" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="submittedTimeStamp" header="SUBMITTED" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-submittedDate="rowData" pTemplate="body">
+                                {{ submittedDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="cancelledTimeStamp" header="CANCELLED" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-cancelledDate="rowData" pTemplate="body">
+                                {{ cancelledDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="emailSentTimeStamp" header="EMAIL SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-emailDate="rowData" pTemplate="body">
+                                {{ emailDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="lastReminderSentTimeStamp" header="LAST REMAINDER" [sortable]="true" [filter]="true" [style]="{'min-width':'162px', 'max-width':'162px', 'text-align': 'center'}">
+                            <ng-template let-col let-lastRemDate="rowData" pTemplate="body">
+                                {{ lastRemDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="appHandOverTimeStamp" header="APP HANDOVER" [sortable]="true" [filter]="true" [style]="{'min-width':'158px', 'max-width':'158px','text-align': 'center'}">
+                            <ng-template let-col let-submittedDate="rowData" pTemplate="body">
+                                {{ submittedDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="lastBatchTimeStamp" header="LAST BATCH" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-lastBatchDate="rowData" pTemplate="body">
+                                {{ lastBatchDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="acsSentTimeStamp" header="ACS SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-acsDate="rowData" pTemplate="body">
+                                {{ acsDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="medisysSentTimeStamp" header="MEDISYS SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'144px', 'max-width':'144px','text-align': 'center'}">
+                            <ng-template let-col let-medisysDate="rowData" pTemplate="body">
+                                {{ medisysDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="imagingSentTimeStamp" header="IMAGING SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'146px', 'max-width':'146px','text-align': 'center'}">
+                            <ng-template let-col let-imagingDate="rowData" pTemplate="body">
+                                {{ imagingDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="hovSentTimeStamp" header="HOV SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-hovDate="rowData" pTemplate="body">
+                                {{ hovDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="cosmoSentTimeStamp" header="COSMO SENT" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-cosmoDate="rowData" pTemplate="body">
+                                {{ cosmoDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="agencyName" header="AGNECY" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px', 'text-align': 'center'}"></p-column>
+                        <p-column field="agentTIN" header="AGNET TIN" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px','text-align': 'center'}"></p-column>
+                        <p-column field="agentFirstName" header="AGENT FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="agentMiddleInitial" header="AGENT MI" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="agentLastName" header="AGENT LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="agentStateID" header="AGENT STATE ID" [sortable]="true" [filter]="true" [style]="{'min-width':'159px', 'max-width':'159px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgencyName" header="PARENT AGENCY" [sortable]="true" [filter]="true" [style]="{'min-width':'158px', 'max-width':'158px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgentTIN" header="PARENT AGENT TIN" [sortable]="true" [filter]="true" [style]="{'min-width':'178px', 'max-width':'178px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgentFirstName" header="PARENT AGENT FIRST" [sortable]="true" [filter]="true" [style]="{'min-width':'187px', 'max-width':'187px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgentMI" header="PARENT AGENT MI" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgentLastName" header="PARENT AGENT LAST" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center'}"></p-column>
+                        <p-column field="parentAgentStateID" header="PARENT AGENT STATE ID" [sortable]="true" [filter]="true" [style]="{'min-width':'210px', 'max-width':'210px','text-align': 'center'}"></p-column>
+                        <p-column field="applyForOthers" header="APPLYING FOR OTHERS" [sortable]="true" [filter]="true" [style]="{'min-width':'202px', 'max-width':'202px','text-align': 'center'}"></p-column>
+                        <p-column field="agentAssisted" header="AGENT ASSISTED" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center'}"></p-column>
+                        <p-column field="agentSubmitted" header="AGENT SUBMITTED" [sortable]="true" [filter]="true" [style]="{'min-width':'180px', 'max-width':'180px','text-align': 'center'}"></p-column>
+                        <p-column field="workingWithAgent" header="WORKING WITH AGENT" [sortable]="true" [filter]="true" [style]="{'min-width':'205px', 'max-width':'205px', 'text-align': 'center'}"></p-column>
+                        <p-column field="medicareClaimNo" header="HICN" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="productId" header="PRODUCT ID" [sortable]="true" [filter]="true" [style]="{'min-width':'130px', 'max-width':'130px', 'text-align': 'center'}"></p-column>
+                        <p-column field="productDisplayName" header="PRODUCT NAME" [sortable]="true" [filter]="true" [style]="{'min-width':'190px', 'max-width':'190px', 'text-align': 'center', 'white-space':'normal'}"></p-column>
+                        <p-column field="modifiedBy" header="UPDATED ID" [sortable]="true" [filter]="true" [style]="{'min-width':'276px', 'max-width':'276px', 'text-align': 'center'}"></p-column>
+                        <p-column field="modifiedOn" header="UPDATED" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-updatedDate="rowData" pTemplate="body">
+                                {{ updatedDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="createdBy" header="CREATED ID" [sortable]="true" [filter]="true" [style]="{'min-width':'280px', 'max-width':'280px', 'text-align': 'center'}"></p-column>
+                        <p-column field="createdOn" header="CREATED" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px', 'text-align': 'center'}">
+                            <ng-template let-col let-createdDate="rowData" pTemplate="body">
+                                {{ createdDate[col.field] | date:'MM/dd/yyyy HH:mm:ss' }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="documentType" header="DOCUMENT TYPE" [sortable]="true" [filter]="true" [style]="{'min-width':'161px', 'max-width':'161px','text-align': 'center'}"></p-column>
+                        <p-column field="deviceType" header="DEVICE TYPE" [sortable]="true" [filter]="true" [style]="{'min-width':'140px', 'max-width':'140px','text-align': 'center'}"></p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+            <div class="row user-result-list" *ngIf="noSearchResult" [hidden]='!showSearchCriteria'>
+                <div class="col-12 error-input">
+                    <span class="error-message">
+                        <i class="fa fa-exclamation-triangle"></i> {{ noSearchResult }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<sd-nopdf #noPdfModal [pdfacn]="pdfacn" [title]="'ACN PDF Document'"></sd-nopdf>

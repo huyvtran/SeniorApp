@@ -1,0 +1,26 @@
+<div bsModal #logoutModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg container row">
+        <div class="col-md-1"></div>
+        <div class=" col-md-10 modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title pull-left ml-4 mr-4">{{ title }}</h1>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mb-2 mt-2 ml-3 mr-3">
+                <div class="row logout-confirm-msg">Are you sure you want to logout from the application ?</div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="footer-button-grp btn-grp-pop">
+                    <div class="footer-button-grp">
+                        <button class="btn btn-primary primary-button" (click)="logout()"> OK </button>
+                        <button class="btn btn-default secondary-button" (click)="hide()"> CANCEL </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>

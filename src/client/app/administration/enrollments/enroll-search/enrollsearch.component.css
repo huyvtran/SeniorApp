@@ -1,0 +1,165 @@
+h1, h2, h3 {
+    font: Segoe UI;
+    color: #2f2f2f;
+}
+h1 {
+    font-weight: 400;
+    font-size: 24px;
+    padding-bottom: 30px;
+    margin-left: -15px;
+}
+h2 {
+    font-weight: 600;
+    font-size: 15px;
+}
+h3 {
+    font-weight: normal;
+    font-size: 13px;
+}
+.md-padding-top {
+    padding-top: 70px;
+}
+.sd-padding-top {
+    padding-top: 50px;
+}
+.sd-margin-top {
+    margin-top: 20px;
+}
+
+.block-group {
+    background-color: #f0f0f0;
+    border: 1px solid #d7d7d7;
+    margin-top: 10px;
+    padding: 20px 16px 2px 16px;
+}
+.formHolder{
+    width:90%;
+}
+.block-group h2 {
+    padding-bottom: 6px;
+}
+.block-group-invert {
+    border-top: 1px solid #d7d7d7;
+    background-color: #FFF;
+}
+.expand-icon, .collapse-icon {
+    height: 29px;
+    width:29px;
+    display:inline-block;
+}
+.expand-icon {
+    background: url(./assets/images/accordion-closed.png) no-repeat center;
+} 
+.collapse-icon {
+    background: url(./assets/images/accordion-open-new.png) no-repeat center;
+}
+.search-button {
+    background: url(./assets/images/search-icon.png) no-repeat center;
+    width: 41px;
+    height: 41px;
+    border: none;
+    margin-right:10px;
+    /*background-size: 100%;*/
+}
+.pass-icon:before {
+    content: "\f005";
+    color: #fe5e3c;
+    font-size: 9px;
+    padding-right: 3px;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 8px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+}
+.search-button:focus {
+    outline: none;
+}
+.clear-button {
+    outline: none; 
+    background: url(./assets/images/reset-icon.png) no-repeat center;
+    width: 41px;
+    height: 41px;
+    border: none;
+}
+.clear-close {
+    position: absolute;
+    right: 87px;
+    bottom: 8px;   
+    cursor: pointer;
+}
+
+.accordion-icon {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}
+.actionControlsContainer{
+    width:100%;
+    padding-top:5px;
+    padding-bottom:25px;
+}
+.input-group-btn{
+    top: -39px;
+    right: 0px;
+    left: 175px;
+    background-color: #fff;
+    
+}
+.input-group-btn .glyphicon-calendar:before{
+    color: #fe5e3c;
+    font-weight: bold;
+    
+}
+.input-group-btn .btn.btn-default{
+    background-color: #fff;
+    font-size:15px;
+}
+.form-inline label {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start; 
+    -webkit-align-items: flex-start; 
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-box-pack: start; 
+    -webkit-justify-content:start ;
+    -ms-flex-pack: start; 
+    justify-content: flex-start; 
+     margin-bottom: 0;
+	 width:100%;
+  }
+
+.user-result-list {
+    background: #FFF;
+}
+.user-result-list-inner {
+    padding: 15px 10px;
+}
+.help-popup {
+    float: right;
+    cursor: pointer;
+    position: absolute;
+    right: 33%;
+    top: 11px;
+}
+.error-input {
+    padding: 0;
+}
+.result-set-info-top {
+    padding: 10px 0 0 0px;
+}
+.enrollment-tab form {
+    width: 100%;
+}
+.single-field .clear-close {
+    right: 166px;
+}
